@@ -1,6 +1,11 @@
 # Sonico
 A Discord bot by Silverdroid.
-Version 1.0 | Build 1
+Version 1.0 | Build 2
+
+Sonico is a Discord Bot written in Python.
+It is still in development, more features will be added!
+
+[Invite the Bot to your server!](http://sonico.silverdroid.ga/invite.php)
 
 ## Commands
 Here is a full list of all bot commands.
@@ -21,5 +26,11 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .shutdown | The Bot will shut down.
 
 ## Changelog
+Version 1.0 | Build 2
+- Minor improvements:
+    - .avatar without a mentioned user will now show your own avatar
+    - .user without a mentioned user will now show your own user information
+    - Sonico is now using Unicode Emoji instead of the Discord Emoji Codes
+
 Version 1.0 | Build 1
 - Initial Release
