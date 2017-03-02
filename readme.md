@@ -26,6 +26,9 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .shutdown | The Bot will shut down.
 
 ## Changelog
+Version 1.0 | Build 3
+- Added Error Logging
+
 Version 1.0 | Build 2
 - Minor improvements:
     - .avatar without a mentioned user will now show your own avatar
