@@ -1,6 +1,6 @@
 # Sonico
 A Discord bot by Silverdroid.
-Version 1.0 | Build 3
+Version 1.0.1 | Build 4
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
