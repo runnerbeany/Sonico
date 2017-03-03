@@ -1,10 +1,20 @@
-import discord
-import asyncio
+import discord, asyncio, time, datetime, os, logging
 client = discord.Client()
 token = '' #Insert Discord Bot Token
 adminID = "" #Insert your ID to access the Admin commands
 version = "1.0"
-build = "2"
+build = "3"
+
+now = datetime.datetime.now()
+if os.path.isdir("logs") == False: #Setting up logging:
+    os.makedirs("logs/")
+logfile = "logs/" + datetime.datetime.now().strftime('discordlog_%Y-%m-%d_%H-%M.log')
+logger = logging.getLogger('discord')
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
+print("Session log file: ", logfile)
 
 print("")
 print("Sonico: A Bot by Silverdroid. - v."+ str(version))
@@ -139,4 +149,12 @@ async def on_message(message):
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
 
-client.run(token)
+@client.event
+async def on_error(event, *args, **kwargs):
+    #await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event rasied on: " + event)
+    print("Error Raised: " + str(sys.exc_info()) + "```" + "Event rasied on: " + event)
+
+try:
+    client.run(token)
+except Exception as e:
+    print("Something has gone wrong. Err: " + str(e) + " Check your log files.")
