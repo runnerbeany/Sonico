@@ -1,7 +1,7 @@
 import discord, asyncio, time, datetime, os, logging, sys
 from cogs.mal import mal
 client = discord.Client()
-token = 'Mjg3Mjc4MDY4MjcwMjM1NjU4.C5tp1w.yUWmNa9SqSOnfCVRaxZxlMXaMKo' #Insert Discord Bot Token
+token = '' #Insert Discord Bot Token
 adminID = "" #Insert your ID to access the Admin commands
 version = "1.0"
 build = "3"
