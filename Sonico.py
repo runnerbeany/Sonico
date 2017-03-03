@@ -1,6 +1,7 @@
-import discord, asyncio, time, datetime, os, logging
+import discord, asyncio, time, datetime, os, logging, sys
+from cogs.mal import mal
 client = discord.Client()
-token = '' #Insert Discord Bot Token
+token = 'Mjg3Mjc4MDY4MjcwMjM1NjU4.C5tp1w.yUWmNa9SqSOnfCVRaxZxlMXaMKo' #Insert Discord Bot Token
 adminID = "" #Insert your ID to access the Admin commands
 version = "1.0"
 build = "3"
@@ -24,7 +25,7 @@ print("")
 @client.event
 async def on_ready():
     print("Logged in to Discord as "+client.user.name+"#"+client.user.discriminator)
-    print("User ID: "+client.user.id)
+    print("User ID: "+str(client.user.id))
     print("")
     await client.change_presence(game=discord.Game(name=".help (*・ω・)ﾉ | v"+str(version)))
     print("Sonico is ready, nya~")
@@ -93,6 +94,25 @@ async def on_message(message):
         else:
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
+
+    if message.content.startswith(".anime"):
+        query = message.content[6:]
+        embed = discord.Embed()
+        embed.title = "Animu | {0}".format(query)
+        dat = mal.animu(query)
+        if dat == "serverError":
+            embed.description = "Sorry! Something isn't right at the moment, I've let the developers know."
+        elif dat == "credError":
+            embed.description = "Sorry! Something isn't right at the moment, I've let the developers know."
+        elif dat == "noResults":
+            embed.description = "Awh shucks, I didn't find anything for that search query!"
+        else:
+            embed = discord.Embed()
+            embed.title = "Animu | {0}".format(dat[0])
+            embed.color = discord.Color.blue()
+            embed.description = str(dat[1])
+            embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
+        await client.send_message(message.channel, embed=embed)
 
     #Admin Commands
     if message.content.startswith(".profileimage"):

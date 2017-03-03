@@ -151,6 +151,19 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith('.dev features'):
+        if message.author.id == adminID:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.green()
+            Embed.set_author(name='Features List', value="Here's a list of all current and upcoming features.")
+            Embed.add_field(name='Avatar Viewing', value="Views the avatar of a user. .avatar shows yours, and .avatar <user> shows - you got it! The user specified's!")
+
+
+
+
+
+
+            await client.send_message(message.channel, embed=Embed)
 
 #Fun Commands
 @client.event
