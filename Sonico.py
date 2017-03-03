@@ -3,7 +3,7 @@ client = discord.Client()
 token = '' #Insert Discord Bot Token
 adminID = "" #Insert your ID to access the Admin commands
 version = "1.0"
-build = "3"
+build = "4"
 
 now = datetime.datetime.now()
 if os.path.isdir("logs") == False: #Setting up logging:
@@ -38,6 +38,7 @@ async def on_message(message):
         Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
         Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
         Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
+        Embed.add_field(name="🌍 .website", value="I will give you a link to my website, where you can read more about me :3")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the specified user (´｡• ᵕ •｡`)")
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
@@ -59,10 +60,16 @@ async def on_message(message):
         Embed.color = discord.Color.green()
         Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(version))
-        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="I am a Bot developed by Silverdroid (*・ω・)ﾉ")
+        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
         Embed.add_field(name="🤖", value="Bot Version: v"+str(version))
         Embed.add_field(name="📌", value="Build Number: "+str(build))
         await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".website"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
 
     #Misc. Commands
     if message.content.startswith(".avatar"):
@@ -83,7 +90,7 @@ async def on_message(message):
         Embed = discord.Embed()
         Embed.color = discord.Color.blue()
         Embed.set_image(url=mention.avatar_url)
-        Embed.set_author(name="Username: "+mention.name+"#"+mention.discriminator, icon_url=mention.avatar_url)
+        Embed.set_author(name=mention.name+"#"+mention.discriminator, icon_url=mention.avatar_url)
         Embed.add_field(name="Username", value=mention.name+"#"+mention.discriminator)
         Embed.add_field(name="ID", value=mention.id)
         Embed.add_field(name="Status", value=mention.status)
@@ -157,4 +164,4 @@ async def on_error(event, *args, **kwargs):
 try:
     client.run(token)
 except Exception as e:
-    print("Something has gone wrong. Err: " + str(e) + " Check your log files.")
+    print("Something has gone wrong, nya~ Error: " + str(e) + " Check your log files.")

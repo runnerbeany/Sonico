@@ -25,7 +25,15 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .status | Changes the status message of the Bot.
 - .shutdown | The Bot will shut down.
 
+## Website
+Check out Sonico's Website: http://sonico.silverdroid.ga
+
 ## Changelog
+Version 1.0 | Build 4
+- Minor Fixes
+- Removed Development Folder, moved to branch dev instead
+- New command: .website
+
 Version 1.0 | Build 3
 - Added Error Logging
 
