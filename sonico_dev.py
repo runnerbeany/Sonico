@@ -1,14 +1,18 @@
 import discord
 import asyncio
 import config
+import requests
 client = discord.Client()
 token = config.token #Insert Discord Bot Token
 adminID = config.admins #Insert your ID to access the Admin commands
 version = "1.0"
 build = "1"
 branch = 'dev'
+print(len(list(client.servers)))
 
-print("")
+servers = (list(client.servers))
+
+#print("")
 print("Sonico: A Bot by Silverdroid. - v."+ str(version))
 print("""----------
 DEVELOPMENT BRANCH - WILL BE BUGGY!
@@ -23,6 +27,7 @@ STARTUP COMPLETE!
 ----------""")
     print("Logged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+client.user.id)
+    print("Connected to"+len(servers)+" servers.")
     print("")
     await client.change_presence(game=discord.Game(name="Sonico Development! | v"+str(version)))
 #    print("Sonico is ready, nya~")
@@ -146,5 +151,38 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
+
+#Fun Commands
+@client.event
+async def on_message(message):
+    if message.content.startswith("~urban"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        defi = message.content[7:]
+        #Embed.title = "Urban Yobbs | " + defi
+        Embed.set_author(name="Urban Dic | {0}".format(defi), url="http://urbandictionary.com/define.php?term={0}".format(defi))
+        Embed.description = "Contacting Urban Dictionary..."
+        temp = await client.send_message(message.channel, embed=Embed)
+        try:
+            url = 'http://api.urbandictionary.com/v0/define?term=%s' % (defi)
+            response = requests.get(url)
+            response.raise_for_status()
+            data = json.loads(response.content.decode('utf-8'))
+            definition = data['list'][0]['definition']
+            Embed.description = str(definition)
+            Embed.set_footer(text="http://www.urbandictionary.com/define.php?term={0}".format(defi), icon_url='http://www.urbandictionary.com/favicon.ico')
+            await client.edit_message(temp, embed=Embed)
+        except:
+            Embed.description = "I dunno wat happen. Bet u type something that ain't even real did u! Don't fuck with seal."
+            await client.edit_message(temp, embed=Embed)
+
+@client.event
+async def on_message(message):
+
+    if message.content.startswith('>urbandict'):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.dark_orange()
+        Embed.add_field(name='Urban Dictionary', value='nothing to be seen here...')
+        await client.send_message(message.channel, embed=Embed)
 
 client.run(token)
