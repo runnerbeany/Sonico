@@ -1,10 +1,13 @@
-import discord, asyncio, time, datetime, os, logging, sys
+import discord, asyncio, time, datetime, os, logging, sys, config
 from cogs.mal import mal
+from cogs.osu import osu
 client = discord.Client()
-token = '' #Insert Discord Bot Token
-adminID = "" #Insert your ID to access the Admin commands
+token = config.token #Insert Discord Bot Token
+adminID = config.admins #Insert your ID to access the Admin commands
 version = "1.0"
 build = "3"
+
+
 
 now = datetime.datetime.now()
 if os.path.isdir("logs") == False: #Setting up logging:
@@ -19,9 +22,8 @@ print("Session log file: ", logfile)
 
 print("")
 print("Sonico: A Bot by Silverdroid. - v."+ str(version))
-print("Eating Macarons while starting up (ﾉ◕ヮ◕)ﾉ*:･")
+print("Eating Macarons while starting up")
 print("")
-
 @client.event
 async def on_ready():
     print("Logged in to Discord as "+client.user.name+"#"+client.user.discriminator)
@@ -43,7 +45,7 @@ async def on_message(message):
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
-        Embed.add_field(name="✨ .shutdown", value="The Sonico Bot will shut down. **Admins only.**")
+        Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
         await client.send_message(message.channel, embed=Embed)
 
     #Generic Commands
@@ -114,6 +116,24 @@ async def on_message(message):
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
 
+    if message.content.startswith(".osu"):
+        query = message.content[3:]
+        embed = discord.Embed()
+        embed.title = "OSU | {0}".format(query)
+        dat = osu.osuapi(query)
+        if dat == 'serverError':
+            embed.description = "Hmm. That didn't work. Try again later!"
+        elif dat == "credError":
+            embed.description = "Hmm... Something broke. Try again later! (devs notified!)"
+        elif dat == "noResults":
+            embed.description = "We've come up empty! Try a different query."
+        else:
+            embed = discord.Embed()
+            embed.title = 'OSU | {0}'.format(query)
+            embed.color = discord.Color.pink()
+            embed.description = str(dat[1])
+            embed.set_footer(text="https://osu.ppy.sh", icon_url='https://www.google.co.uk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjql4Kqu7vSAhVB2BQKHZ1aAawQjRwIBw&url=https%3A%2F%2Ftwitter.com%2Fosugame&psig=AFQjCNHeijIEM3Li8yl682_Z9cHtEy2qEw&ust=1488669269628818')
+            await client.send_message(message.channel, embed=Embed)
     #Admin Commands
     if message.content.startswith(".profileimage"):
         if message.author.id == adminID:
