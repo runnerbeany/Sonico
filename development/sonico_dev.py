@@ -8,8 +8,11 @@ adminID = config.admins #Insert your ID to access the Admin commands
 version = "1.0"
 build = "1"
 branch = 'dev'
+print(len(list(client.servers)))
 
-print("")
+servers = (list(client.servers))
+
+#print("")
 print("Sonico: A Bot by Silverdroid. - v."+ str(version))
 print("""----------
 DEVELOPMENT BRANCH - WILL BE BUGGY!
@@ -24,6 +27,7 @@ STARTUP COMPLETE!
 ----------""")
     print("Logged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+client.user.id)
+    print("Connected to"+len(servers)+" servers.")
     print("")
     await client.change_presence(game=discord.Game(name="Sonico Development! | v"+str(version)))
 #    print("Sonico is ready, nya~")
