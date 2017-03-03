@@ -5,8 +5,7 @@ print("OSU Api v1.0\nBy runnerbeany\ngithub.com/runnerbeany\n")
 
 class osu:
     def osuapi(query):
-        r = requests.get('https://osu.ppy.sh/api/get_user/?u={0}&k=4f8f4a5f60a915d0077905f71b36919479ed4073'.format(query))
-        dat == r.text
+        r = requests.get('https://osu.ppy.sh/api/get_user/?u={0}k=c84541313dbba78969225795f68b02d3bee2c51b').format(query)) 
         dat = json.load(r.text)
         userid = dat['user_id']
         username = dat['username']
