@@ -70,6 +70,7 @@ async def on_message(message):
         Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(version))
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
+        await client.send_message(message.channel, embed=Embed)
 
     #Misc. Commands
     if message.content.startswith(".avatar"):
