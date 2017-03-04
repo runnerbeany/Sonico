@@ -1,9 +1,9 @@
-import discord, asyncio, time, datetime, os, logging, sys
+import discord, asyncio, time, datetime, os, logging, sys, config
 from cogs.mal import mal
 from cogs.osu import osu
 client = discord.Client()
-token = '' #Insert Discord Bot Token
-adminID = "" #Insert your ID to access the Admin commands
+token = config.token #Insert Discord Bot Token
+adminID = config.admins #Insert your ID to access the Admin commands
 version = "1.0 dev"
 build = "dev/4"
 
@@ -85,7 +85,7 @@ async def on_message(message):
         Embed.set_author(name=mention.name+"#"+mention.discriminator, icon_url=mention.avatar_url)
         Embed.set_image(url=mention.avatar_url)
         await client.send_message(message.channel, embed=Embed)
-        
+
     if message.content.startswith(".user"):
         if message.mentions:
             mention = message.mentions[0]
@@ -123,7 +123,7 @@ async def on_message(message):
             embed.description = str(dat[1])
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
-        
+
     if message.content.startswith(".osu"):
         query = message.content[3:]
         embed = discord.Embed()
