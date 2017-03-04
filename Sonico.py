@@ -1,11 +1,11 @@
-import discord, asyncio, time, datetime, os, logging, sys, config
+import discord, asyncio, time, datetime, os, logging, sys
 from cogs.mal import mal
 from cogs.osu import osu
 client = discord.Client()
-token = config.token #Insert Discord Bot Token
-adminID = config.admins #Insert your ID to access the Admin commands
-version = "1.0"
-build = "3"
+token = '' #Insert Discord Bot Token
+adminID = "" #Insert your ID to access the Admin commands
+version = "1.0 dev"
+build = "dev/4"
 
 
 
@@ -41,6 +41,7 @@ async def on_message(message):
         Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
         Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
         Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
+        Embed.add_field(name="🌍 .website", value="I will give you a link to my website, where you can read more about me :3")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the specified user (´｡• ᵕ •｡`)")
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
@@ -62,10 +63,16 @@ async def on_message(message):
         Embed.color = discord.Color.green()
         Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(version))
-        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="I am a Bot developed by Silverdroid (*・ω・)ﾉ")
+        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
         Embed.add_field(name="🤖", value="Bot Version: v"+str(version))
         Embed.add_field(name="📌", value="Build Number: "+str(build))
         await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".website"):
+        Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
+        await client.send_message(message.channel, embed=Embed)
+
 
     #Misc. Commands
     if message.content.startswith(".avatar"):
@@ -75,9 +82,10 @@ async def on_message(message):
             mention = message.author
         Embed = discord.Embed()
         Embed.color = discord.Color.blue()
-        Embed.set_author(name=mention.name, icon_url=mention.avatar_url)
+        Embed.set_author(name=mention.name+"#"+mention.discriminator, icon_url=mention.avatar_url)
         Embed.set_image(url=mention.avatar_url)
         await client.send_message(message.channel, embed=Embed)
+        
     if message.content.startswith(".user"):
         if message.mentions:
             mention = message.mentions[0]
@@ -115,24 +123,24 @@ async def on_message(message):
             embed.description = str(dat[1])
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
-
+        
     if message.content.startswith(".osu"):
         query = message.content[3:]
         embed = discord.Embed()
-        embed.title = "OSU | {0}".format(query)
+        embed.title = "osu! | {0}".format(query)
         dat = osu.osuapi(query)
         if dat == 'serverError':
-            embed.description = "Hmm. That didn't work. Try again later!"
+            embed.description = "Hmm... That didn't work. Try again later, nya~"
         elif dat == "credError":
             embed.description = "Hmm... Something broke. Try again later! (devs notified!)"
         elif dat == "noResults":
-            embed.description = "We've come up empty! Try a different query."
+            embed.description = "I couldn't find anything, nya~ Try something different."
         else:
             embed = discord.Embed()
-            embed.title = 'OSU | {0}'.format(query)
+            embed.title = 'osu! | {0}'.format(query)
             embed.color = discord.Color.pink()
             embed.description = str(dat[1])
-            embed.set_footer(text="https://osu.ppy.sh", icon_url='https://www.google.co.uk/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjql4Kqu7vSAhVB2BQKHZ1aAawQjRwIBw&url=https%3A%2F%2Ftwitter.com%2Fosugame&psig=AFQjCNHeijIEM3Li8yl682_Z9cHtEy2qEw&ust=1488669269628818')
+            embed.set_footer(text="https://osu.ppy.sh", icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
             await client.send_message(message.channel, embed=Embed)
     #Admin Commands
     if message.content.startswith(".profileimage"):
@@ -193,10 +201,10 @@ async def on_message(message):
 
 @client.event
 async def on_error(event, *args, **kwargs):
-    #await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event rasied on: " + event)
-    print("Error Raised: " + str(sys.exc_info()) + "```" + "Event rasied on: " + event)
+    #await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
+    print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
 
 try:
     client.run(token)
 except Exception as e:
-    print("Something has gone wrong. Err: " + str(e) + " Check your log files.")
+    print("Something has gone wrong, nya~ Error: " + str(e) + " Check your log files.")

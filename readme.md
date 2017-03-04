@@ -1,6 +1,10 @@
 # Sonico Development Branch
 A Discord bot by Silverdroid.
-Version 1.0.1 | Build 4
+Version 1.0 DEV | Build dev/4
+
+```Please note!
+This is a DEVELOPMENT BUILD. Some features will not be working properly.
+For a stable release, please browse the /master branch.```
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
@@ -8,8 +12,8 @@ It is still in development, more features will be added!
 [Invite the Bot to your server!](http://sonico.silverdroid.ga/invite.php)
 
 ## Upcoming Features
-### subject to change.
-- An integrated music player!
+- Music Bot Features!
+- .sonico | Random imges of our waifu, nya~
 
 ## Commands
 Here is a full list of all bot commands.
@@ -20,10 +24,13 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .invite | Invite the bot to another Server (*・ω・)ﾉ
 - .about | Let the bot tell you a bit about itself.
 
+### Searching Commands
+- .anime | Search anime on MyAnimeList
+- (INDEV) .osu user [username] | Views the specified user's osu! page.
+
 ### Miscellaneous Commands
 - .avatar | The bot will show you the avatar of the specified user.
 - .user | Shows additional info about the specified user.
-- (Upcoming) .osu user [username] | Views the specified user's osu! page.
 
 ### Admin Commands
 - .profileimage | Changes the profile image of the Bot.

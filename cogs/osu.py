@@ -1,11 +1,11 @@
 import requests
 import json
 
-print("OSU Api v1.0\nBy runnerbeany\ngithub.com/runnerbeany\n")
+print("osu! API v1.0\nBy runnerbeany\ngithub.com/runnerbeany\n")
 
 class osu:
     def osuapi(query):
-        r = requests.get('https://osu.ppy.sh/api/get_user/?u={0}k=c84541313dbba78969225795f68b02d3bee2c51b', type=username).format(query)
+        r = requests.get('https://osu.ppy.sh/api/get_user?u={0}&k=dfc290ab0fca5d8e54b6eb28d9134407b4723b48&u=username'.format(query))
         dat = json.load(r.text)
         userid = dat['user_id']
         username = dat['username']
@@ -15,10 +15,10 @@ class osu:
 
         print(r.status_code)
         if r.status_code == 200:
-            print('Response code was 200 OK.')
+            print('Response Code OK. (200)')
         if r.status_code == 201:
             return noResults
-        if r.text == "Invalid Credientials":
+        if r.text == "Invalid Credentials":
             return 'credError'
 
         if dat == '':
