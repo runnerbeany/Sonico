@@ -1,20 +1,21 @@
 import requests
 import json
 
-print("osu! API v1.1\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
+print("osu! API v1.2\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
 
 class osu:
     def osuapi(query):
         r = requests.get('https://osu.ppy.sh/api/get_user?u={0}&k=dfc290ab0fca5d8e54b6eb28d9134407b4723b48'.format(query))
         dat = r.json()
         dat = dat[0]
-        usr = dat['username']
-        usrid = dat['user_id']
-        count300 = dat['count300']
-        playcount = dat['playcount']
-        acc = dat['accuracy']
-        country = dat['country']
-        return usr,usrid,count300,playcount,acc,country
+        data = []
+        data.append(dat['username'])
+        data.append(dat['user_id'])
+        data.append(dat['count300'])
+        data.append(dat['playcount'])
+        data.append(dat['accuracy'])
+        data.append(dat['country'])
+        return data
 
         print(r.status_code)
         if r.status_code == 200:
@@ -26,3 +27,5 @@ class osu:
 
         if dat == '':
             return 'noResults'
+
+print(osu.osuapi('silverdroid'))
