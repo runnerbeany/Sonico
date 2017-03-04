@@ -1,4 +1,4 @@
-import discord, asyncio, time, datetime, os, logging, sys
+import discord, asyncio, time, datetime, os, logging, sys, json
 
 #Command Extensions
 from cogs.mal import mal
@@ -7,7 +7,7 @@ from cogs.osu import osu
 #Define the client function with discord.client.
 client = discord.Client()
 
-with open('config.json') as json_data_file:#Load up the config file (config.json)
+with open('cfg/config.json') as json_data_file:#Load up the config file (config.json)
     config = json.load(json_data_file)
 #Logging
 now = datetime.datetime.now()
@@ -25,7 +25,7 @@ print("\nSonico: A Bot by Silverdroid. - v."+ str(config['info']['version']))
 print("Eating Macarons while starting up")
 print("\nNOTE: This is a DEVELOPER Build.")
 print("Those builds still have issues and might not run properly.")
-print("For a stable build of Sonico, head to the /master branch.")
+print("For a stable build of Sonico, head to the /master branch.\n")
 @client.event
 async def on_ready():
     print("\nLogged in to Discord as "+client.user.name+"#"+client.user.discriminator)
@@ -105,10 +105,10 @@ async def on_message(message):
         else:
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
-
     if message.content.startswith(".dev anime"):
         query = message.content[10:]
         embed = discord.Embed()
+        embed = discord.Color.red()
         embed.title = "🌺 Anime | {0}".format(query)
         dat = mal.animu(query)
         if dat == "serverError":
