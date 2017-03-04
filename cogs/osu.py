@@ -1,7 +1,7 @@
 import requests
 import json
 
-print("osu! API v1.2\nMade with love by runnerbeany & Nevexo\ngithub.com/runnerbeany | github.com/nevexo\n")
+print("osu! API v1.2\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
 
 class osu:
     def osuapi(query):
