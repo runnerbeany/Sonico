@@ -4,17 +4,11 @@ import discord, asyncio, time, datetime, os, logging, sys
 from cogs.mal import mal
 from cogs.osu import osu
 
-#Connect to Discord API
+#Define the client function with discord.client.
 client = discord.Client()
 
-#Insert your Token and Admin IDs here.
-token = '' #Insert your Application Token here.
-adminID = "" #Add the IDs of the Admins here.
-
-#Version
-version = "1.1"
-build = "dev/5"
-
+with open('config.json') as json_data_file:#Load up the config file (config.json)
+    config = json.load(json_data_file)
 #Logging
 now = datetime.datetime.now()
 if os.path.isdir("logs") == False: #Setting up logging:
@@ -27,7 +21,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 print("Session log file: ", logfile)
 
-print("\nSonico: A Bot by Silverdroid. - v."+ str(version))
+print("\nSonico: A Bot by Silverdroid. - v."+ str(config['info']['version']))
 print("Eating Macarons while starting up")
 print("\nNOTE: This is a DEVELOPER Build.")
 print("Those builds still have issues and might not run properly.")
@@ -36,7 +30,7 @@ print("For a stable build of Sonico, head to the /master branch.")
 async def on_ready():
     print("\nLogged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+str(client.user.id))
-    await client.change_presence(game=discord.Game(name="Developer Build | v"+str(version)))
+    await client.change_presence(game=discord.Game(name="Developer Build | v"+str(config['info']['version'])))
     print("\nSonico is ready, nya~")
 @client.event
 async def on_message(message):
@@ -44,7 +38,7 @@ async def on_message(message):
         Embed = discord.Embed()
         Embed.color = discord.Color.green()
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
         Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
         Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
@@ -61,7 +55,7 @@ async def on_message(message):
         Embed = discord.Embed()
         Embed.color = discord.Color.blue()
         Embed.set_author(name="Click here to invite me to another Server, nya~", url="http://sonico.silverdroid.ga/invite.php", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🎉 Invite me (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php   .")
         Embed.add_field(name="💾 View my code on Github!", value="http://sonico.silverdroid.ga/github.php")
         await client.send_message(message.channel, embed=Embed)
@@ -69,14 +63,14 @@ async def on_message(message):
         Embed = discord.Embed()
         Embed.color = discord.Color.green()
         Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
-        Embed.add_field(name="🤖", value="Bot Version: v"+str(version))
-        Embed.add_field(name="📌", value="Build Number: "+str(build))
+        Embed.add_field(name="🤖", value="Bot Version: v"+str(config['info']['version']))
+        Embed.add_field(name="📌", value="Build Number: "+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
     if message.content.startswith(".dev website"):
         Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
 
@@ -123,7 +117,7 @@ async def on_message(message):
         elif dat == "credError":
             embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
             embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
-        elif dat == "noResults":   
+        elif dat == "noResults":
             embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
             embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
