@@ -1,11 +1,15 @@
-# Sonico
+# Sonico Development Branch
 A Discord bot by Silverdroid.
-Version 1.0 | Build 3
+Version 1.0.1 | Build 4
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
 
 [Invite the Bot to your server!](http://sonico.silverdroid.ga/invite.php)
+
+## Upcoming Features
+# subject to change.
+- An integrated music player!
 
 ## Commands
 Here is a full list of all bot commands.
@@ -19,6 +23,7 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 ### Miscellaneous Commands
 - .avatar | The bot will show you the avatar of the specified user.
 - .user | Shows additional info about the specified user.
+- (Upcoming) .osu user [username] | Views the specified user's osu! page.
 
 ### Admin Commands
 - .profileimage | Changes the profile image of the Bot.
