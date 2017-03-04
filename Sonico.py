@@ -175,13 +175,15 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
-    if message.content.startswith(".shutdown"):
+    if message.content.startswith(".dev shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed()
             Embed.color = discord.Color.green()
             Embed.add_field(name="✨ Shutting down.", value="Goodbye, nya~")
             print("Sonico is shutting down, nya~")
+            await client.change_presence(game=None, status='dnd')
             await client.send_message(message.channel, embed=Embed)
+            time.sleep(5)
             await client.logout()
         else:
             Embed = discord.Embed()
