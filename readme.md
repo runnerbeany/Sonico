@@ -1,5 +1,6 @@
+[![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
 # Sonico
-A Discord bot by Silverdroid.
+A Discord bot by Silverdroid, Nevexo and Runnerbeany.
 Version 1.0.1 | Build 4
 
 Sonico is a Discord Bot written in Python.
