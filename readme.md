@@ -8,7 +8,7 @@ It is still in development, more features will be added!
 [Invite the Bot to your server!](http://sonico.silverdroid.ga/invite.php)
 
 ## Upcoming Features
-# subject to change.
+### subject to change.
 - An integrated music player!
 
 ## Commands
