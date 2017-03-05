@@ -31,10 +31,6 @@ print("Session log file: ", logfile)
 print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
-print("NOTE: This is a DEVELOPER Build.\n")
-print("Those builds still have issues and might not run properly.\n")
-print("For a stable build of Sonico, head to the /master branch.")
-print("------------------------------------------")
 #EXPERIMENTAL: Shutdown bot through command window
 def shutdown():
     shutdown = input('Shutdown?')
@@ -49,7 +45,7 @@ async def on_ready():
 
     print("\nLogged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+str(client.user.id))
-    await client.change_presence(game=discord.Game(name="Developer Build |"+str(config['info']['version'])))
+    await client.change_presence(game=discord.Game(name=".help ♡ |"+str(config['info']['version'])))
     print("\nSonico is ready, nya~")
 
 @client.event
