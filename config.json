@@ -1,13 +1,1 @@
-{
-    "info":{
-      "version":"1.1",
-      "name":"Sonico Dev",
-      "build":"dev/7"
-    },
-    "tokens":{
-        "token":""
-    },
-    "admins":{
-        "admins": ""
-    }
-}
+{"info": {"version": "v1.2", "name": "Sonico Dev", "build": "19", "builtby": "Nevexo"}, "tokens": {"token": ""}, "admins": {"admins": ""}}

@@ -24,6 +24,7 @@ logger.addHandler(handler)
 print("Session log file: ", logfile)
 
 print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
+print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + "\n")
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
 print("NOTE: This is a DEVELOPER Build.\n")
@@ -62,7 +63,7 @@ async def on_message(message):
         Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the user you mentioned (´｡• ᵕ •｡`)")
         Embed.add_field(name="🌺 .anime", value="Search for your favorite **anime**, nya~")
-        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.") 
+        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.")
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
@@ -93,7 +94,7 @@ async def on_message(message):
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
 
-        
+
     #Fun Commands
     if message.content.startswith(".cuddle"):
         if message.mentions:
@@ -114,8 +115,8 @@ async def on_message(message):
         Embed.add_field(name="Time to take a nap, nya~", value=message.author.name+" takes a nap with "+napping.name)
         Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/nap.gif")
         await client.send_message(message.channel, embed=Embed)
-        
-        
+
+
     #Misc. Commands
     if message.content.startswith(".avatar"):
         if message.mentions:
