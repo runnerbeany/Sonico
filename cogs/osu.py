@@ -32,3 +32,5 @@ class osu:
         if dat == '':
             return 'noResults'
 
+data = osu.osuapi('silverdroid')
+print(str(data))
