@@ -1,4 +1,4 @@
-import discord, asyncio, time, datetime, os, logging, sys
+import discord, asyncio, time, datetime, os, logging, sys, json, random
 
 #Command Extensions
 from cogs.mal import mal
@@ -6,9 +6,11 @@ from cogs.osu import osu
 
 #Define the client function with discord.client.
 client = discord.Client()
-
-with open('config.json') as json_data_file:#Load up the config file (config.json)
+with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
     config = json.load(json_data_file)
+#Set version, build and admins
+info = config['info']['build']
+adminID = config['admins']['admins']
 #Logging
 now = datetime.datetime.now()
 if os.path.isdir("logs") == False: #Setting up logging:
@@ -21,17 +23,30 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 print("Session log file: ", logfile)
 
-print("\nSonico: A Bot by Silverdroid. - v."+ str(config['info']['version']))
-print("Eating Macarons while starting up")
-print("\nNOTE: This is a DEVELOPER Build.")
-print("Those builds still have issues and might not run properly.")
+print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
+print("Eating Macarons while starting up\n")
+print("------------------------------------------")
+print("NOTE: This is a DEVELOPER Build.\n")
+print("Those builds still have issues and might not run properly.\n")
 print("For a stable build of Sonico, head to the /master branch.")
+print("------------------------------------------")
+#EXPERIMENTAL: Shutdown bot through command window
+def shutdown():
+    shutdown = input('Shutdown?')
+    if shutdown == True:
+        print("Sonico is shutting down.")
+        client.logout
+    else:
+        shutdown
+
 @client.event
 async def on_ready():
+
     print("\nLogged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+str(client.user.id))
-    await client.change_presence(game=discord.Game(name="Developer Build | v"+str(config['info']['version'])))
+    await client.change_presence(game=discord.Game(name="Developer Build |"+str(config['info']['version'])))
     print("\nSonico is ready, nya~")
+
 @client.event
 async def on_message(message):
     if message.content.startswith(".dev help"):
@@ -129,7 +144,7 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith(".dev osu"):
-        query = message.content[3:]
+        query = message.content[9:]
         embed = discord.Embed()
         embed.title = "osu! | {0}".format(query)
         dat = osu.osuapi(query)
@@ -143,12 +158,32 @@ async def on_message(message):
             embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
             embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
-            embed = discord.Embed()
-            embed.title = 'osu! | {0}'.format(query)
-            embed.color = discord.Color.blue()
-            embed.description = str(dat[1])
-            embed.set_footer(text="https://osu.ppy.sh", icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+
+            data = osu.osuapi(message.content[9:])
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'osu! | {0}'.format(query)
+            Embed.description = 'User Information for {0}'.format(query)
+            Embed.set_footer(text="https://osu.ppy.sh", icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+            Embed.add_field(name='User ID', value=str(data[1]))
+            Embed.add_field(name='Play Count:', value=str(data[2]))
+            Embed.add_field(name='Accuracy:', value=str(data[4]))
+            Embed.add_field(name='Country:', value=str(data[5]))
+            Embed.add_field(name='PP Rank', value=str(data[6]))
+            Embed.add_field(name='Level:', value=str(data[7]))
+            Embed.set_thumbnail(url=data[8])
+
+
             await client.send_message(message.channel, embed=Embed)
+
+#        if message.content.startswith(".dev sonico"):
+##        Embed = discord.Embed()
+#        embed.set_author(name='Sonico')
+#        embed.title = 'Sonico'
+#        embed.color = discord.Color.blue()
+#        embed.description = "Hellow"
+#        embed.set_footer(text="heh", icon_url='http://assets.silverdroid.ga/assets/sonico/avatar.png')
+#        await client.send_message(message.channel, embed=Embed)
+
     #Admin Commands
     if message.content.startswith(".dev profileimage"):
         if message.author.id == adminID:
@@ -219,12 +254,12 @@ async def on_message(message):
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
 
-@client.event
-async def on_error(event, *args, **kwargs):
+#@client.event
+#sync def on_error(event, *args, **kwargs):
     #await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
-    print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
+#    print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
 
 try:
-    client.run(token)
+    client.run(config['tokens']['token'])
 except Exception as e:
     print("Something has gone wrong, nya~ Error: " + str(e) + " Check your log files.")
