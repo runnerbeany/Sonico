@@ -24,6 +24,7 @@ logger.addHandler(handler)
 print("Session log file: ", logfile)
 
 print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
+print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + "\n")
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
 print("NOTE: This is a DEVELOPER Build.\n")
