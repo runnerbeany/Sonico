@@ -18,7 +18,18 @@ class startup:
             startup.warm()
         else:
             print("Fyi, if you see an option that takes a yes or no [y/n] which ever character is in caps (Eg: [Y/n]) that option will run by just pressing enter.")
-            username = str(input("Enter your username (For built by)> "))
+            if os.path.isfile("username.txt") == False:
+                username = str(input("Enter your username (For built by)> "))
+                instance = open("username.txt", "w")
+                instance.write(username)
+                instance.close()
+                print("I've put your username into a file called username.txt, keep this file, and you won't have to type your username again.")
+                time.sleep(1)
+            else:
+                instance = open("username.txt", "r")
+                username = instance.read()
+                instance.close()
+                print("Welcome, " + username)
             print("Startup complete. Taking you home!")
             time.sleep(0.5)
             main.home()
