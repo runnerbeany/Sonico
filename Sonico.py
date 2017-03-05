@@ -63,7 +63,7 @@ async def on_message(message):
         Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the user you mentioned (´｡• ᵕ •｡`)")
         Embed.add_field(name="🌺 .anime", value="Search for your favorite **anime**, nya~")
-        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.") 
+        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
         Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
         await client.send_message(message.channel, embed=Embed)
@@ -127,9 +127,9 @@ async def on_message(message):
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
 
-<<<<<<< HEAD
+
         if message.content.startswith(".anime"):
-            query = message.content[6:]
+            query = message.content[5:]
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = "🌺 Anime | {0}".format(query)
             dat = mal.animu(query)
