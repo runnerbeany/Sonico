@@ -72,16 +72,15 @@ async def on_message(message):
 
     #Generic Commands
     if message.content.startswith(".invite"):
-        Embed = discord.Embed()
         Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Click here to invite me to another Server, nya~", url="http://sonico.silverdroid.ga/invite.php", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
-        Embed.add_field(name="🎉 Invite me (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php   .")
+        Embed.add_field(name="🎉 Invite me to your server (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php")
         Embed.add_field(name="💾 View my code on Github!", value="http://sonico.silverdroid.ga/github.php")
         await client.send_message(message.channel, embed=Embed)
         
     if message.content.startswith(".about"):
-        Embed = discord.Embed()
+        Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
@@ -90,10 +89,9 @@ async def on_message(message):
         await client.send_message(message.channel, embed=Embed)
 
     if message.content.startswith(".website"):
-        Embed = discord.Embed()
-        Embed.color = discord.Color.blue()
+        Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
 
