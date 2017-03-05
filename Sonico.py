@@ -1,10 +1,14 @@
 import discord, asyncio, time, datetime, os, logging, sys, json, random
-
+print("Starting Sonico...\n")
 #Command Extensions
+print("------------------\n")
+print("Loading cogs...")
 from cogs.mal import mal
 from cogs.osu import osu
 from cogs.yt import yt
 from cogs.dict import define
+print("Cogs loaded!")
+print("------------------")
 #Define the client function with discord.client.
 client = discord.Client()
 with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
@@ -191,6 +195,20 @@ async def on_message(message):
         Embed.description = 'Is something not working properly? Give us a yell over at https://github.com/xSilverdroid/Sonico/issues.'
         Embed.set_footer(text=str(config['info']['version'])+' build '+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
+
+    if message.content.startswith(".urbandict"):
+        defi = define.urban(str(message.content[9:]))
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Urban Dictionary | {0}'
+    if defi == False:
+        Embed.description = "noffin' found! bet u didn't even type some real ting did u, don't fuk with me!"
+    #    Embed.color = discord.Color.red()
+    else:
+        Embed = discord.Embed(color=0xE865A0)
+    #    Embed.color = discord.Color.blue()
+        Embed.description = (defi)
+        await client.send_message(message.channel, embed=Embed)
+
 
 #        if message.content.startswith(".dev sonico"):
 ##        Embed = discord.Embed()
