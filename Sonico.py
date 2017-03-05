@@ -51,8 +51,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith(".help"):
-        Embed = discord.Embed()
-        Embed.color = discord.Color.green()
+        Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
@@ -74,30 +73,22 @@ async def on_message(message):
     #Generic Commands
     if message.content.startswith(".invite"):
         Embed = discord.Embed()
-        Embed.color = discord.Color.blue()
+        Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Click here to invite me to another Server, nya~", url="http://sonico.silverdroid.ga/invite.php", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🎉 Invite me (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php   .")
         Embed.add_field(name="💾 View my code on Github!", value="http://sonico.silverdroid.ga/github.php")
         await client.send_message(message.channel, embed=Embed)
+        
     if message.content.startswith(".about"):
         Embed = discord.Embed()
-        Embed.color = discord.Color.green()
         Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(version))
-        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
-        Embed.add_field(name="🤖", value="Bot Version: v"+str(version))
-        Embed.add_field(name="📌", value="Build Number: "+str(build))
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="My name is Super Sonico, I am an 18 year old college student from Japan. Well, actually I am a Bot developed by Silverdroid, Nevexo and runnerbeany (*・ω・)ﾉ")
         Embed.add_field(name="🤖", value="Bot Version: v"+str(config['info']['version']))
         Embed.add_field(name="📌", value="Build Number: "+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
-    if message.content.startswith(".website"):
-        Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
-        Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
-        await client.send_message(message.channel, embed=Embed)
+
     if message.content.startswith(".website"):
         Embed = discord.Embed()
         Embed.color = discord.Color.blue()
@@ -162,7 +153,7 @@ async def on_message(message):
 
     if message.content.startswith(".anime"):
         query = message.content[6:]
-        embed = discord.Embed()
+        Embed = discord.Embed(color=0xE865A0)
         embed.title = "🌺 Anime | {0}".format(query)
         dat = mal.animu(query)
         if dat == "serverError":
@@ -175,9 +166,8 @@ async def on_message(message):
             embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
             embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
-            embed = discord.Embed()
+            Embed = discord.Embed(color=0xE865A0)
             embed.title = "🌺 Anime | {0}".format(dat[0])
-            embed.color = discord.Color.blue()
             embed.description = str(dat[1])
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
@@ -277,9 +267,9 @@ async def on_message(message):
             await client.send_message(message.channel, embed=Embed)
     if message.content.startswith(".shutdown"):
         if message.author.id == adminID:
-            Embed = discord.Embed()
+            Embed = discord.Embed(color=0xE865A0)
             Embed.add_field(name="✨ Shutting down.", value="Good Night, nya~")
-            Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
+        Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
             print("Good night, nya~ (Shutting down.)")
             await client.change_presence(game=None, status='dnd')
             await client.send_message(message.channel, embed=Embed)
