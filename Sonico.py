@@ -4,6 +4,7 @@ import discord, asyncio, time, datetime, os, logging, sys, json, random
 from cogs.mal import mal
 from cogs.osu import osu
 from cogs.yt import yt
+from cogs.dict import define
 #Define the client function with discord.client.
 client = discord.Client()
 with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
@@ -122,55 +123,59 @@ async def on_message(message):
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
 
-    if message.content.startswith(".dev anime"):
-        query = message.content[10:]
-        embed = discord.Embed()
-        embed.title = "🌺 Anime | {0}".format(query)
-        dat = mal.animu(query)
+        if message.content.startswith(".anime"):
+            query = message.content[6:]
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = "🌺 Anime | {0}".format(query)
+            dat = mal.animu(query)
         if dat == "serverError":
-            embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
         elif dat == "credError":
-            embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
         elif dat == "noResults":
-            embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
-            embed = discord.Embed()
-            embed.title = "🌺 Anime | {0}".format(dat[0])
-            embed.color = discord.Color.blue()
-            embed.description = str(dat[1])
-            embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
-        await client.send_message(message.channel, embed=embed)
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = "🌺 Anime | {0}".format(dat[0])
+            Embed.description = str(dat[1])
+            Embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
+            await client.send_message(message.channel, embed=Embed)
 
-    if message.content.startswith(".dev osu"):
-        query = message.content[9:]
-        embed = discord.Embed()
-        embed.title = "osu! | {0}".format(query)
+    if message.content.startswith(".osu"):
+        query = message.content[5:]
+        Embed = discord.Embed()
+        Embed.title = "osu! | {0}".format(query)
         dat = osu.osuapi(query)
         if dat == 'serverError':
-            embed.description = "Hmm... That didn't work. Try again later, nya~"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Hmm... That didn't work. Try again later, nya~"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         elif dat == "credError":
-            embed.description = "Hmm... Something broke. Try again later, nya~)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Hmm... Something broke. Try again later, nya~)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         elif dat == "noResults":
-            embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         else:
-
-            data = osu.osuapi(message.content[9:])
+            data = osu.osuapi(message.content[5:])
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = 'osu! | {0}'.format(query)
             Embed.description = 'User Information for {0}'.format(query)
             Embed.set_footer(text="https://osu.ppy.sh", icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
-            Embed.add_field(name='User ID', value=str(data[1]))
-            Embed.add_field(name='Play Count:', value=str(data[2]))
-            Embed.add_field(name='Accuracy:', value=str(data[4]))
-            Embed.add_field(name='Country:', value=str(data[5]))
-            Embed.add_field(name='PP Rank', value=str(data[6]))
-            Embed.add_field(name='Level:', value=str(data[7]))
+            Embed.add_field(name='🆔 User ID', value=str(data[1]))
+            Embed.add_field(name='🎮 Play Count:', value=str(data[2]))
+            Embed.add_field(name='🏅 Accuracy:', value=str(data[4]))
+            Embed.add_field(name='🌍 Country:', value=str(data[5]))
+            Embed.add_field(name='🔶 Rank', value=str(data[6]))
+            Embed.add_field(name='🚀 Level:', value=str(data[7]))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
 
