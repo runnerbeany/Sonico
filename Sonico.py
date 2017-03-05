@@ -1,11 +1,8 @@
 import discord, asyncio, time, datetime, os, logging, sys, json, random
-print("Loading cogs...")
+
 #Command Extensions
 from cogs.mal import mal
 from cogs.osu import osu
-from cogs.yt import yt
-print("Cogs loaded!\n")
-print("------------------------")
 
 #Define the client function with discord.client.
 client = discord.Client()
@@ -24,10 +21,10 @@ logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
-print("\nSession log file: ", logfile)
+print("Session log file: ", logfile)
 
-print("\nSONICO: A Bot by Silverdroid, Runnerbeany & Nevexo - "+ str(config['info']['version']))
-print("\nEating Macarons while starting up\n")
+print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
+print("Eating Macarons while starting up\n")
 print("------------------------------------------")
 #EXPERIMENTAL: Shutdown bot through command window
 def shutdown():
@@ -76,7 +73,7 @@ async def on_message(message):
         Embed.add_field(name="🎉 Invite me (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php   .")
         Embed.add_field(name="💾 View my code on Github!", value="http://sonico.silverdroid.ga/github.php")
         await client.send_message(message.channel, embed=Embed)
-        
+
     if message.content.startswith(".about"):
         Embed = discord.Embed()
         Embed.color = discord.Color.green()
@@ -86,7 +83,7 @@ async def on_message(message):
         Embed.add_field(name="🤖", value="Bot Version: v"+str(config['info']['version']))
         Embed.add_field(name="📌", value="Build Number: "+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
-        
+
     if message.content.startswith(".website"):
         Embed.set_author(name="Check out my website, nya~", url="http://sonico.silverdroid.ga", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
@@ -104,7 +101,7 @@ async def on_message(message):
         Embed.add_field(name="Cuddle time! Nya~", value=message.author.name+" cuddles with "+cuddled.name)
         Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/cuddle.gif")
         await client.send_message(message.channel, embed=Embed)
-        
+
     if message.content.startswith(".nap"):
         if message.mentions:
             napping = message.mentions[0]
@@ -114,8 +111,8 @@ async def on_message(message):
         Embed.add_field(name="Time to take a nap, nya~", value=message.author.name+" takes a nap with "+napping.name)
         Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/nap.gif")
         await client.send_message(message.channel, embed=Embed)
-        
-    
+
+
     #Misc. Commands
     if message.content.startswith(".avatar"):
         if message.mentions:
@@ -147,7 +144,7 @@ async def on_message(message):
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
 
-          
+
     #API Commands
     if message.content.startswith(".anime"):
         query = message.content[10:]
@@ -170,7 +167,7 @@ async def on_message(message):
             embed.description = str(dat[1])
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
-        
+
     if message.content.startswith(".osu"):
         query = message.content[9:]
         embed = discord.Embed()
@@ -200,7 +197,7 @@ async def on_message(message):
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
 
-            
+
     #Admin Commands
     if message.content.startswith(".profileimage"):
         if message.author.id == adminID:
@@ -243,7 +240,7 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
-            
+
     if message.content.startswith(".status"):
         if message.author.id == adminID:
             await client.change_presence(game=discord.Game(name=message.content[8:]))
@@ -256,7 +253,7 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
-            
+
     if message.content.startswith(".shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed()
