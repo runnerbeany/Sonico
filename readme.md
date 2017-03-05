@@ -1,5 +1,5 @@
 # Sonico Development Branch
-A Discord bot by Silverdroid, Nevexo and Runnerbeany.
+A Discord entirely written in Python.
 Version 1.1 | Build dev/7
 
 ```Please note!
@@ -42,12 +42,19 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .status | Changes the status message of the Bot.
 - .shutdown | The Bot will shut down.
 
+## Contributors
+Sonico is entirely developed by those 3 people:
+
+- Silverdroid - Head Developer, Web Admin
+- Nevexo - Second Developer, Server Admin / Hosting
+- Runnerbeany - Third Developer
+
 ## Changelog
 This is the **Sonico Changelog.**
 
 #### Version 1.1
 Version 1.1 | Build 7
-- osu! integration.
+- osu! integration finished
 - .cuddle command
 - .nap command
 - Config improvements
