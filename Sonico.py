@@ -182,8 +182,9 @@ async def on_message(message):
             embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=embed)
 
+
     if message.content.startswith(".osu"):
-        query = message.content[9:]
+        query = message.content[5:]
         embed = discord.Embed()
         embed.title = "osu! | {0}".format(query)
         dat = osu.osuapi(query)
@@ -197,7 +198,6 @@ async def on_message(message):
             embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
             embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
-
             data = osu.osuapi(message.content[5:])
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = 'osu! | {0}'.format(query)
