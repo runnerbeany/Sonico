@@ -1,6 +1,6 @@
 # Sonico Development Branch
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
-Version 1.1 | Build dev/6
+Version 1.1 | Build dev/7
 
 ```Please note!
 This is a DEVELOPMENT BUILD. Some features will not be working properly.
@@ -14,6 +14,7 @@ It is still in development, more features will be added!
 ## Upcoming Features
 - Music Bot Features!
 - .sonico | Random imges of our waifu, nya~
+- .nsfw | Lewd pictures of Sonico~ OwO
 
 ## Commands
 Here is a full list of all bot commands.
@@ -22,11 +23,15 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 ### Generic Commands
 - .help | Shows a list of commands.
 - .invite | Invite the bot to another Server (*・ω・)ﾉ
-- .about | Let the bot tell you a bit about itself.
+- .about | Let Sonico tell you a bit about herself.
+
+### Fun Commands
+- .cuddle | Cuddle with your friends!
+- .nap | Tired? Take a nap with your friends
 
 ### Searching Commands
 - .anime | Search anime on MyAnimeList
-- (INDEV) .osu user [username] | Views the specified user's osu! page.
+- .osu user [username] | Views the specified user's osu! page.
 
 ### Miscellaneous Commands
 - .avatar | The bot will show you the avatar of the specified user.
@@ -38,10 +43,21 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .shutdown | The Bot will shut down.
 
 ## Changelog
+This is the **Sonico Changelog.**
+
+#### Version 1.1
+Version 1.1 | Build 7
+- osu! integration.
+- .cuddle command
+- .nap command
+- Config improvements
+- Minor Fixes
+
 Version 1.1 | Build 6
 - Error Logging works properly now.
-- osu! support! Use .osu [username] to search someones osu profile! (beta)
+- osu! integration! Use .osu [username] to search someones osu profile! (beta)
 
+#### Version 1.0
 Version 1.0 | Build 3
 - Added Error Logging
 
