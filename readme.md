@@ -1,6 +1,6 @@
 # Sonico Development Branch
-A Discord bot by Silverdroid.
-Version 1.1 | Build dev/5
+A Discord bot by Silverdroid, Nevexo and Runnerbeany.
+Version 1.1 | Build dev/6
 
 ```Please note!
 This is a DEVELOPMENT BUILD. Some features will not be working properly.
