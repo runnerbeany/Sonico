@@ -152,39 +152,45 @@ async def on_message(message):
     if message.content.startswith(".anime"):
         query = message.content[6:]
         Embed = discord.Embed(color=0xE865A0)
-        embed.title = "🌺 Anime | {0}".format(query)
+        Embed.title = "🌺 Anime | {0}".format(query)
         dat = mal.animu(query)
         if dat == "serverError":
-            embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
         elif dat == "credError":
-            embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
         elif dat == "noResults":
-            embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
         else:
             Embed = discord.Embed(color=0xE865A0)
-            embed.title = "🌺 Anime | {0}".format(dat[0])
-            embed.description = str(dat[1])
-            embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
-        await client.send_message(message.channel, embed=embed)
+            Embed.title = "🌺 Anime | {0}".format(dat[0])
+            Embed.description = str(dat[1])
+            Embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
+        await client.send_message(message.channel, embed=Embed)
 
 
     if message.content.startswith(".osu"):
         query = message.content[5:]
-        embed = discord.Embed()
-        embed.title = "osu! | {0}".format(query)
+        Embed = discord.Embed()
+        Embed.title = "osu! | {0}".format(query)
         dat = osu.osuapi(query)
         if dat == 'serverError':
-            embed.description = "Hmm... That didn't work. Try again later, nya~"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Hmm... That didn't work. Try again later, nya~"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         elif dat == "credError":
-            embed.description = "Hmm... Something broke. Try again later, nya~)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            Embed.description = "Hmm... Something broke. Try again later, nya~)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         elif dat == "noResults":
-            embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
-            embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
         else:
             data = osu.osuapi(message.content[5:])
             Embed = discord.Embed(color=0xE865A0)
