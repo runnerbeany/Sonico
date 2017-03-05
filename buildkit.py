@@ -117,7 +117,7 @@ class main:
                     else:
                         config['tokens']['token'] = arr[1]
                     admins = input("Enter admins (Seperate with commands)> ")
-                    config['admins']['admins'] = admin
+                    config['admins']['admins'] = admins
                 else:
                     token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
                     config['tokens']['token'] = token
