@@ -172,9 +172,14 @@ async def on_message(message):
             Embed.add_field(name='PP Rank', value=str(data[6]))
             Embed.add_field(name='Level:', value=str(data[7]))
             Embed.set_thumbnail(url=data[8])
-
-
             await client.send_message(message.channel, embed=Embed)
+
+    if message.content.startswith(".bug"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Bug Reporting'
+        Embed.description = 'Is something not working properly? Give us a yell over at https://github.com/xSilverdroid/Sonico/issues.'
+        Embed.set_footer(text=str(config['info']['version'])+' build '+str(config['info']['build']))
+        await client.send_message(message.channel, embed=Embed)
 
 #        if message.content.startswith(".dev sonico"):
 ##        Embed = discord.Embed()
