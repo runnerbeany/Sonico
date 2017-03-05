@@ -4,7 +4,10 @@ config.py
 =======
 logs/
 >>>>>>> refs/remotes/xSilverdroid/master
+<<<<<<< HEAD
+=======
 cogs/keys
 images/Thumbs.db
 config.json
 run.bat
+>>>>>>> dev
