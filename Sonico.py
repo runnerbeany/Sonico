@@ -266,9 +266,9 @@ async def on_message(message):
     if message.content.startswith(".shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed(color=0xE865A0)
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
             Embed.add_field(name="✨ Shutting down.", value="Good Night, nya~")
-        Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
-            print("Good night, nya~ (Shutting down.)")
+            print("Shutting down.")
             await client.change_presence(game=None, status='dnd')
             await client.send_message(message.channel, embed=Embed)
             time.sleep(5)
