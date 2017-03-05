@@ -133,14 +133,6 @@ async def on_message(message):
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = "🌺 Anime | {0}".format(query)
             dat = mal.animu(query)
-=======
-
-    if message.content.startswith(".anime"):
-        query = message.content[6:]
-        Embed = discord.Embed(color=0xE865A0)
-        Embed.title = "🌺 Anime | {0}".format(query)
-        dat = mal.animu(query)
->>>>>>> fcbfbf4de767bf548e60dfbcc36e135e195bccd6
         if dat == "serverError":
             Embed.description = "Sorry! Something isn't right at the moment, I'll let the developers know."
             Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
@@ -155,13 +147,8 @@ async def on_message(message):
             Embed.title = "🌺 Anime | {0}".format(dat[0])
             Embed.description = str(dat[1])
             Embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
-<<<<<<< HEAD
             await client.send_message(message.channel, embed=Embed)
-=======
-        await client.send_message(message.channel, embed=Embed)
 
-
->>>>>>> fcbfbf4de767bf548e60dfbcc36e135e195bccd6
 
     if message.content.startswith(".osu"):
         query = message.content[5:]
@@ -184,13 +171,7 @@ async def on_message(message):
             await client.send_message(message.channel, embed=Embed)
             return
         else:
-<<<<<<< HEAD
             data = osu.osuapi(message.content[5:])
-=======
-
-            data = osu.osuapi(message.content[5:])
-
->>>>>>> fcbfbf4de767bf548e60dfbcc36e135e195bccd6
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = 'osu! | {0}'.format(query)
             Embed.description = 'User Information for {0}'.format(query)
