@@ -51,16 +51,16 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith(".dev help"):
-        Embed = discord.Embed()
-        Embed.color = discord.Color.green()
+        Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
-        Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']))
         Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
         Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
         Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
         Embed.add_field(name="🌍 .website", value="I will give you a link to my website, where you can read more about me :3")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the specified user (´｡• ᵕ •｡`)")
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
+        Embed.add_field(name=":bug: .bug", value='Found an issue? This command will link you to our issues page on GitHub.')
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
         Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
