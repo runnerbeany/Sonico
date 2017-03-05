@@ -38,6 +38,10 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .shutdown | The Bot will shut down.
 
 ## Changelog
+Version 1.1 | Build 6
+- Error Logging works properly now.
+- osu! support! Use .osu [username] to search someones osu profile! (beta)
+
 Version 1.0 | Build 3
 - Added Error Logging
 
