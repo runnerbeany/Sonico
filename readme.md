@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-[![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
-# Sonico
-A Discord bot by Silverdroid, Nevexo and Runnerbeany.
-Version 1.1 | Build 7
-=======
 # Sonico Development Branch
 A Discord entirely written in Python.
 Version 1.1 | Build dev/7
@@ -11,7 +5,6 @@ Version 1.1 | Build dev/7
 ```Please note!
 This is a DEVELOPMENT BUILD. Some features will not be working properly.
 For a stable release, please browse the /master branch.```
->>>>>>> dev
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
@@ -49,17 +42,6 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .status | Changes the status message of the Bot.
 - .shutdown | The Bot will shut down.
 
-<<<<<<< HEAD
-## Website
-Check out Sonico's Website: http://sonico.silverdroid.ga
-
-## Changelog
-Version 1.0 | Build 4
-- Minor Fixes
-- Removed Development Folder, moved to branch dev instead
-- New command: .website
-
-=======
 ## Contributors
 Sonico is entirely developed by those 3 people:
 
@@ -72,9 +54,25 @@ This is the **Sonico Changelog.**
 
 #### Version 1.1
 Version 1.1 | Build 7
-- MyAnimeList Integration
-- osu! Integration
+- osu! integration finished
 - .cuddle command
 - .nap command
 - Config improvements
 - Minor Fixes
+
+Version 1.1 | Build 6
+- Error Logging works properly now.
+- osu! integration! Use .osu [username] to search someones osu profile! (beta)
+
+#### Version 1.0
+Version 1.0 | Build 3
+- Added Error Logging
+
+Version 1.0 | Build 2
+- Minor improvements:
+    - .avatar without a mentioned user will now show your own avatar
+    - .user without a mentioned user will now show your own user information
+    - Sonico is now using Unicode Emoji instead of the Discord Emoji Codes
+
+Version 1.0 | Build 1
+- Initial Release
