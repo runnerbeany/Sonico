@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 [![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
 Version 1.1 | Build 7
+=======
+# Sonico Development Branch
+A Discord entirely written in Python.
+Version 1.1 | Build dev/7
 
-```This is a Stable Build. This build was carefully tested and checked.
-If you still appear to stumble upon a bug, tell us by opening an issue!```
+```Please note!
+This is a DEVELOPMENT BUILD. Some features will not be working properly.
+For a stable release, please browse the /master branch.```
+>>>>>>> dev
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
@@ -42,6 +49,7 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 - .status | Changes the status message of the Bot.
 - .shutdown | The Bot will shut down.
 
+<<<<<<< HEAD
 ## Website
 Check out Sonico's Website: http://sonico.silverdroid.ga
 
@@ -51,6 +59,7 @@ Version 1.0 | Build 4
 - Removed Development Folder, moved to branch dev instead
 - New command: .website
 
+=======
 ## Contributors
 Sonico is entirely developed by those 3 people:
 

@@ -1,0 +1,200 @@
+import discord
+import asyncio
+import config
+import requests
+client = discord.Client()
+token = config.token #Insert Discord Bot Token
+adminID = config.admins #Insert your ID to access the Admin commands
+version = "1.0"
+build = "1"
+branch = 'dev'
+print(len(list(client.servers)))
+
+servers = (list(client.servers))
+
+#print("")
+print("Sonico: A Bot by Silverdroid. - v."+ str(version))
+print("""----------
+DEVELOPMENT BRANCH - WILL BE BUGGY!
+----------""")
+print("Eating Macarons while starting up")
+print("")
+
+@client.event
+async def on_ready():
+    print("""----------
+STARTUP COMPLETE!
+----------""")
+    print("Logged in to Discord as "+client.user.name+"#"+client.user.discriminator)
+    print("User ID: "+client.user.id)
+    print("Connected to"+len(servers)+" servers.")
+    print("")
+    await client.change_presence(game=discord.Game(name="Sonico Development! | v"+str(version)))
+#    print("Sonico is ready, nya~")
+@client.event
+async def on_message(message):
+    if message.content.startswith(">help"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.green()
+        Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(version)+", development build")
+        Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
+        Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
+        Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
+        Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the specified user (´｡• ᵕ •｡`)")
+        Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
+        Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
+        Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
+        Embed.add_field(name="✨ .shutdown", value="The Sonico Bot will shut down. **Admins only.**")
+        await client.send_message(message.channel, embed=Embed)
+
+    #Generic Commands
+    if message.content.startswith(".invite"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        Embed.set_author(name="Click here to invite me to another Server, nya~", url="http://sonico.silverdroid.ga/invite.php", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.add_field(name="🎉 Invite me (´｡• ᵕ •｡`)", value="http://sonico.silverdroid.ga/invite.php   .")
+        Embed.add_field(name="💾 View my code on Github!", value="http://sonico.silverdroid.ga/github.php")
+        await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".about"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.green()
+        Embed.set_author(name="About Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(version))
+        Embed.add_field(name="🌺 Hello, I'm Sonico, nya~", value="I am a Bot developed by Silverdroid (*・ω・)ﾉ")
+        Embed.add_field(name="🤖", value="Bot Version: v"+str(version))
+        Embed.add_field(name="📌", value="Build Number: "+str(build))
+        await client.send_message(message.channel, embed=Embed)
+
+    #Misc. Commands
+    if message.content.startswith(".avatar"):
+        if message.mentions:
+            mention = message.mentions[0]
+        else:
+            mention = message.author
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        Embed.set_author(name=mention.name, icon_url=mention.avatar_url)
+        Embed.set_image(url=mention.avatar_url)
+        await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".user"):
+        if message.mentions:
+            mention = message.mentions[0]
+        else:
+            mention = message.author
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        Embed.set_image(url=mention.avatar_url)
+        Embed.set_author(name="Username: "+mention.name+"#"+mention.discriminator, icon_url=mention.avatar_url)
+        Embed.add_field(name="Username", value=mention.name+"#"+mention.discriminator)
+        Embed.add_field(name="ID", value=mention.id)
+        Embed.add_field(name="Status", value=mention.status)
+        Embed.add_field(name="Playing", value=mention.game)
+        if mention.bot == True:
+            Embed.add_field(name="Bot?", value="✅")
+        else:
+            Embed.add_field(name="Bot?", value="❌")
+        await client.send_message(message.channel, embed=Embed)
+
+    #Admin Commands
+    if message.content.startswith(">profileimage"):
+        if message.author.id == adminID:
+            print("Updating profile image, nya~")
+            message_id = await client.send_message(message.channel, ":clock2: Updating profile image, nya~")
+            if "default" in message.content.lower():
+                file = "images/avatar.png"
+            elif "macaron" in message.content.lower():
+                file = "images/macaron.jpg"
+            elif "music" in message.content.lower():
+                file = "images/music.jpg"
+            else:
+                Embed = discord.Embed()
+                Embed.color = discord.Color.red()
+                Embed.add_field(name="Error.", value="Nani? That image doesn't exist, nya~ (´｡• ᵕ •｡`)")
+                await client.send_message(message.channel, embed=Embed)
+                return
+            logo = open(file,"rb")
+            await client.edit_profile(avatar=logo.read())
+            await client.delete_message(message_id)
+            Embed = discord.Embed()
+            Embed.color = discord.Color.green()
+            Embed.add_field(name="✅ Image updated.", value="Do I look pretty? Nya~")
+            await client.send_message(message.channel, embed=Embed)
+        else:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.red()
+            Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
+            await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".status"):
+        if message.author.id == adminID:
+            await client.change_presence(game=discord.Game(name=message.content[8:]))
+            Embed = discord.Embed()
+            Embed.color = discord.Color.green()
+            Embed.add_field(name="✅ Success.", value="Status updated, nya~")
+            await client.send_message(message.channel, embed=Embed)
+        else:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.red()
+            Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
+            await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(">shutdown"):
+        if message.author.id == adminID:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.green()
+            Embed.add_field(name="✨ Shutting down.", value="Goodbye, nya~")
+            print("Sonico is shutting down, nya~")
+            await client.send_message(message.channel, embed=Embed)
+            await client.logout()
+        else:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.red()
+            Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
+            await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith('.dev features'):
+        if message.author.id == adminID:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.green()
+            Embed.set_author(name='Features List', value="Here's a list of all current and upcoming features.")
+            Embed.add_field(name='Avatar Viewing', value="Views the avatar of a user. .avatar shows yours, and .avatar <user> shows - you got it! The user specified's!")
+            await client.send_message(message.channel, embed=Embed)
+
+        else:
+            Embed = discord.Embed()
+            Embed.color = discord.Color.red()
+            Embed.set_author(name='Error:', value='You do not have permission to view this.')
+
+#Fun Commands
+@client.event
+async def on_message(message):
+    if message.content.startswith("~urban"):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.blue()
+        defi = message.content[7:]
+        #Embed.title = "Urban Yobbs | " + defi
+        Embed.set_author(name="Urban Dic | {0}".format(defi), url="http://urbandictionary.com/define.php?term={0}".format(defi))
+        Embed.description = "Contacting Urban Dictionary..."
+        temp = await client.send_message(message.channel, embed=Embed)
+        try:
+            url = 'http://api.urbandictionary.com/v0/define?term=%s' % (defi)
+            response = requests.get(url)
+            response.raise_for_status()
+            data = json.loads(response.content.decode('utf-8'))
+            definition = data['list'][0]['definition']
+            Embed.description = str(definition)
+            Embed.set_footer(text="http://www.urbandictionary.com/define.php?term={0}".format(defi), icon_url='http://www.urbandictionary.com/favicon.ico')
+            await client.edit_message(temp, embed=Embed)
+        except:
+            Embed.description = "I dunno wat happen. Bet u type something that ain't even real did u! Don't fuck with seal."
+            await client.edit_message(temp, embed=Embed)
+
+@client.event
+async def on_message(message):
+
+    if message.content.startswith('>urbandict'):
+        Embed = discord.Embed()
+        Embed.color = discord.Color.dark_orange()
+        Embed.add_field(name='Urban Dictionary', value='nothing to be seen here...')
+        await client.send_message(message.channel, embed=Embed)
+
+client.run(token)
