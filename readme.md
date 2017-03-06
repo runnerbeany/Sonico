@@ -1,9 +1,9 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
-Version 1.1 | Build 7
+Version 1.2.x 
 
-```This is a Stable Build. This build was carefully tested and checked.
+```This is a DEVELOPMENT Build. This build was carefully tested and checked.
 If you still appear to stumble upon a bug, tell us by opening an issue!```
 
 Sonico is a Discord Bot written in Python.
@@ -32,6 +32,7 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 ### Searching Commands
 - .anime | Search anime on MyAnimeList
 - .osu user [username] | Views the specified user's osu! page.
+- .urbandict | Search a word on the Urban Dictionary
 
 ### Miscellaneous Commands
 - .avatar | The bot will show you the avatar of the specified user.
