@@ -103,12 +103,27 @@ class main:
             print("Done! Safe to commit and push to Github.")
         elif answer == 5:
             print("====Token & Admin import====")
-            token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
             config = tools.loadNow()
-            config['tokens']['token'] = token
-            admins = input("Enter admins (Seperate with commands)> ")
-            config['admins']['admins'] = admins
-            print("Done. Writing to disk...")
+            if os.path.isfile("details.txt"):
+                inp = input("Detected details file (Should contain tokens, add them now?) [Y/n]> ").lower()
+                if inp == "y" or inp == "":
+                    instance = open("details.txt", "r")
+                    arr = []
+                    for i in instance.readlines():
+                        arr.append(i)
+                    inp = input("Use stable token or dev token? [DEV/stable]> ").lower()
+                    if inp == "dev" or inp == "":
+                        config['tokens']['token'] = arr[0]
+                    else:
+                        config['tokens']['token'] = arr[1]
+                    admins = input("Enter admins (Seperate with commands)> ")
+                    config['admins']['admins'] = admins
+                else:
+                    token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
+                    config['tokens']['token'] = token
+                    admins = input("Enter admins (Seperate with commands)> ")
+                    config['admins']['admins'] = admins
+                    print("Done. Writing to disk...")
             tools.dumpNow(config)
         elif answer == 6:
             sys.exit()

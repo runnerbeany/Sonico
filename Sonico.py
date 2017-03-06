@@ -95,6 +95,14 @@ async def on_message(message):
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
+        
+    if message.content.startswith(".build"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Build Information'
+        Embed.add_field(name='Build Number:', value=str(config['info']['build']))
+        Embed.add_field(name='Built By:', value=str(config['info']['builtby']))
+        Embed.add_field(name='Version Number:', value=str(config['info']['version']))
+        await client.send_message(message.channel, embed=Embed)
 
 
     #Fun Commands
@@ -172,8 +180,6 @@ async def on_message(message):
             Embed.set_footer(text="https://myanimelist.net", icon_url='https://myanimelist.cdn-dena.com/images/faviconv5.ico')
         await client.send_message(message.channel, embed=Embed)
 
-
-
     if message.content.startswith(".osu"):
         query = message.content[5:]
         Embed = discord.Embed()
@@ -226,14 +232,11 @@ async def on_message(message):
         Embed.set_footer(text='Sonico v'+str(config['info']['version'])+' | Build '+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
 
-#        if message.content.startswith(".dev sonico"):
-##        Embed = discord.Embed()
-#        embed.set_author(name='Sonico')
-#        embed.title = 'Sonico'
-#        embed.color = discord.Color.blue()
-#        embed.description = "Hellow"
-#        embed.set_footer(text="heh", icon_url='http://assets.silverdroid.ga/assets/sonico/avatar.png')
-#        await client.send_message(message.channel, embed=Embed)
+    if message.content.startswith(".sonico"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.set_author(name="Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.add_field(name="Whoops. This command is still in development.", value="Check back again when we are finished, nya~")
+        await client.send_message(message.channel, embed=Embed)
 
     #Admin Commands
     if message.content.startswith(".profileimage"):
