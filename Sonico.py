@@ -22,7 +22,7 @@ if os.path.isdir("logs") == False: #Setting up logging:
     os.makedirs("logs/")
 logfile = "logs/" + datetime.datetime.now().strftime('discordlog_%Y-%m-%d_%H-%M.log')
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
@@ -209,6 +209,13 @@ async def on_message(message):
         Embed.description = (defi)
         await client.send_message(message.channel, embed=Embed)
 
+    if message.content.startswith(".build"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Build Information'
+        Embed.add_field(name='Build Number:', value=str(config['info']['build']))
+        Embed.add_field(name='Built By:', value=str(config['info']['builtby']))
+        Embed.add_field(name='Version Number:', value=str(config['info']['version']))
+        await client.send_message(message.channel, embed=Embed)
 
 #        if message.content.startswith(".dev sonico"):
 ##        Embed = discord.Embed()
@@ -217,7 +224,7 @@ async def on_message(message):
 #        embed.color = discord.Color.blue()
 #        embed.description = "Hellow"
 #        embed.set_footer(text="heh", icon_url='http://assets.silverdroid.ga/assets/sonico/avatar.png')
-#        await client.send_message(message.channel, embed=Embed)
+#        awai0t client.send_message(message.channel, embed=Embed)
 
     #Admin Commands
     if message.content.startswith(".dev profileimage"):
@@ -244,7 +251,7 @@ async def on_message(message):
                 print("Error: That file does not exist, nya~")
                 Embed = discord.Embed()
                 Embed.color = discord.Color.red()
-                Embed.add_field(name="Error.", value="Nani? That image doesn't exist, nya~ (´｡• ᵕ •｡`)")
+                Embed.add_field(name="Error.", value="That image doesn't exist, nya~ (´｡• ᵕ •｡`)")
                 Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
                 await client.send_message(message.channel, embed=Embed)
                 return
