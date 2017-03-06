@@ -160,6 +160,7 @@ async def on_message(message):
             Embed.add_field(name="Bot?", value="❌")
         await client.send_message(message.channel, embed=Embed)
 
+#Searching Commands
 
     if message.content.startswith(".anime"):
         query = message.content[6:]
@@ -227,6 +228,19 @@ async def on_message(message):
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
 
+            if message.content.startswith(".urbandict"):
+                defi = define.urban(str(message.content[9:]))
+                Embed = discord.Embed(color=0xE865A0)
+                Embed.title = 'Urban Dictionary | {0}'
+            if defi == False:
+                Embed.description = "noffin' found! bet u didn't even type some real ting did u, don't fuk with me!"
+            #    Embed.color = discord.Color.red()
+            else:
+                Embed = discord.Embed(color=0xE865A0)
+            #    Embed.color = discord.Color.blue()
+                Embed.description = (defi)
+                await client.send_message(message.channel, embed=Embed)
+#Utility Commands
     if message.content.startswith(".bug"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.title = '🐛 Eek! Is there a bug?'
@@ -240,18 +254,6 @@ async def on_message(message):
         Embed.add_field(name="Whoops. This command is still in development.", value="Check back again when we are finished, nya~")
         await client.send_message(message.channel, embed=Embed)
 
-    if message.content.startswith(".urbandict"):
-        defi = define.urban(str(message.content[9:]))
-        Embed = discord.Embed(color=0xE865A0)
-        Embed.title = 'Urban Dictionary | {0}'
-    if defi == False:
-        Embed.description = "noffin' found! bet u didn't even type some real ting did u, don't fuk with me!"
-    #    Embed.color = discord.Color.red()
-    else:
-        Embed = discord.Embed(color=0xE865A0)
-    #    Embed.color = discord.Color.blue()
-        Embed.description = (defi)
-        await client.send_message(message.channel, embed=Embed)
 
 
     #Admin Commands
