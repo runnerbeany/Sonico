@@ -1,3 +1,4 @@
+##NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
 import discord, asyncio, time, datetime, os, logging, sys, json, random
 
 #Command Extensions
@@ -5,6 +6,7 @@ client = discord.Client()
 from cogs.mal import mal
 from cogs.osu import osu
 from cogs.yt import yt
+from cogs.dict import define
 
 #Define the client function with discord.client.
 client = discord.Client()
@@ -44,7 +46,7 @@ async def on_ready():
 
     print("\nLogged in to Discord as "+client.user.name+"#"+client.user.discriminator)
     print("User ID: "+str(client.user.id))
-    await client.change_presence(game=discord.Game(name=".help ♡ | v"+str(config['info']['version'])))
+    await client.change_presence(game=discord.Game(name="Build "+str(config['info']['build'])+" v"+str(config['info']['version'])))
     print("\nSonico is ready, nya~")
 
 @client.event
@@ -65,7 +67,7 @@ async def on_message(message):
         Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the user you mentioned (´｡• ᵕ •｡`)")
         Embed.add_field(name="🌺 .anime", value="Search for your favorite **anime**, nya~")
-        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.") 
+        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
         Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
         await client.send_message(message.channel, embed=Embed)
@@ -87,7 +89,7 @@ async def on_message(message):
         Embed.add_field(name="🤖", value="Bot Version: v"+str(config['info']['version']))
         Embed.add_field(name="📌", value="Build Number: "+str(config['info']['build']))
         await client.send_message(message.channel, embed=Embed)
-        
+
     if message.content.startswith(".website"):
         Embed = discord.Embed(color=0xE865A0)
 
@@ -95,8 +97,8 @@ async def on_message(message):
         Embed.set_footer(text="Sonico - v"+str(config['info']['version']))
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
-        
-    if message.content.startswith(".build"):
+
+    if message.content.startswith(".dev build"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.title = 'Build Information'
         Embed.add_field(name='Build Number:', value=str(config['info']['build']))
@@ -125,8 +127,8 @@ async def on_message(message):
         Embed.add_field(name="Time to take a nap, nya~", value=message.author.name+" takes a nap with "+napping.name)
         Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/nap.gif")
         await client.send_message(message.channel, embed=Embed)
-        
-        
+
+
     #Misc. Commands
     if message.content.startswith(".avatar"):
         if message.mentions:
@@ -238,6 +240,20 @@ async def on_message(message):
         Embed.add_field(name="Whoops. This command is still in development.", value="Check back again when we are finished, nya~")
         await client.send_message(message.channel, embed=Embed)
 
+    if message.content.startswith(".urbandict"):
+        defi = define.urban(str(message.content[9:]))
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Urban Dictionary | {0}'
+    if defi == False:
+        Embed.description = "noffin' found! bet u didn't even type some real ting did u, don't fuk with me!"
+    #    Embed.color = discord.Color.red()
+    else:
+        Embed = discord.Embed(color=0xE865A0)
+    #    Embed.color = discord.Color.blue()
+        Embed.description = (defi)
+        await client.send_message(message.channel, embed=Embed)
+
+
     #Admin Commands
     if message.content.startswith(".profileimage"):
         if message.author.id == adminID:
@@ -292,7 +308,7 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
-    if message.content.startswith(".shutdown"):
+    if message.content.startswith(".dev shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed(color=0xE865A0)
             Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
