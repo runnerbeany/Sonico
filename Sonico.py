@@ -118,7 +118,7 @@ async def on_message(message):
             cuddled = message.author
         Embed = discord.Embed(color=0xE865A0)
         Embed.add_field(name="Cuddle time! Nya~", value=message.author.name+" cuddles with "+cuddled.name)
-        Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/cuddle.gif")
+        Embed.set_image(url="http://sonico.silverdroid.ga/img/cmd/cuddle.gif")
         await client.send_message(message.channel, embed=Embed)
 
     if message.content.startswith(".nap"):
@@ -128,7 +128,7 @@ async def on_message(message):
             napping = message.author
         Embed = discord.Embed(color=0xE865A0)
         Embed.add_field(name="Time to take a nap, nya~", value=message.author.name+" takes a nap with "+napping.name)
-        Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/nap.gif")
+        Embed.set_image(url="http://sonico.silverdroid.ga/img/cmd/nap.gif")
         await client.send_message(message.channel, embed=Embed)
 
 
@@ -467,7 +467,7 @@ async def on_message(message):
     if message.content.startswith(".shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed(color=0xE865A0)
-            Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/cmd/shutdown.png")
             Embed.add_field(name="✨ Shutting down.", value="Good Night, nya~")
             print("Shutting down.")
             await client.change_presence(game=None, status='dnd')
