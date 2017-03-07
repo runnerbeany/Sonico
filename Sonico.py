@@ -51,7 +51,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith(".help"):
+    if message.content.startswith(".dev help"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']))
