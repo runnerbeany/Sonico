@@ -1,11 +1,9 @@
 import requests
 import json
 
-print("osu! API v1.3\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
-
-class osu:
-    def osuapi(query):
-        r = requests.get('https://osu.ppy.sh/api/get_user?u={0}&k=dfc290ab0fca5d8e54b6eb28d9134407b4723b48'.format(query))
+class ctb:
+    def ctbapi(query):
+        r = requests.get('https://osu.ppy.sh/api/get_user?u={0}&k=dfc290ab0fca5d8e54b6eb28d9134407b4723b48&m=2'.format(query))
         dat = r.json()
         dat = dat[0]
         avatar = "https://a.ppy.sh/{0}_120.png".format(dat['user_id'])
@@ -23,13 +21,11 @@ class osu:
 
         print(r.status_code)
         if r.status_code == 200:
-            print("Response Code OK. (200)")
+            print('Response Code OK. (200)')
         if r.status_code == 201:
-            return 'noResults'
-        if r.text == 'Invalid Credentials':
-            return 'credError'
-        if dat == '':
-            return 'noResults'
+            return noResults
+        if r.text == "Invalid Credentials":
+            return credError
 
-data = osu.osuapi('runnerbeany')
-print(str(data))
+        if dat == '':
+            return noResults

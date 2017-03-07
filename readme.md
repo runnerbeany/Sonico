@@ -1,9 +1,10 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
-Version 1.2.x 
+Version 1.2
 
-```This is a DEVELOPMENT Build. This build was carefully tested and checked.
+```
+This is a DEVELOPMENT Build. This build was carefully tested and checked.
 If you still appear to stumble upon a bug, tell us by opening an issue!```
 
 Sonico is a Discord Bot written in Python.
@@ -27,12 +28,17 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 
 ### Fun Commands
 - .cuddle | Cuddle with your friends!
-- .nap | Tired? Take a nap with your friends
+- .nap | Tired? Take a nap with your friends!
 
 ### Searching Commands
 - .anime | Search anime on MyAnimeList
-- .osu user [username] | Views the specified user's osu! page.
 - .urbandict | Search a word on the Urban Dictionary
+
+### osu!commands
+- .osu [username] | Views the specified user's osu! stats.
+- .taiko [username] | Views the specified user's osu!taiko stats.
+- .ctb [username] | Views the specified user's Catch the Beat stats.
+- .mania [username] | Views the specified user's osu!mania stats.
 
 ### Miscellaneous Commands
 - .avatar | The bot will show you the avatar of the specified user.
@@ -47,26 +53,4 @@ I am always open for command suggestions (´｡• ω •｡`) ♡
 Check out Sonico's Website: http://sonico.silverdroid.ga
 
 ## Changelog
-Version 1.0 | Build 4
-- Minor Fixes
-- Removed Development Folder, moved to branch dev instead
-- New command: .website
-
-## Contributors
-Sonico is entirely developed by those 3 people:
-
-- Silverdroid - Head Developer, Web Admin
-- Nevexo - Second Developer, Server Admin / Hosting
-- Runnerbeany - Third Developer
-
-## Changelog
-This is the **Sonico Changelog.**
-
-#### Version 1.1
-Version 1.1 | Build 7
-- MyAnimeList Integration
-- osu! Integration
-- .cuddle command
-- .nap command
-- Config improvements
-- Minor Fixes
+We are currently overhauling changelogs. Please be patient.

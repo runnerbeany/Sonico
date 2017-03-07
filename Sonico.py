@@ -1,10 +1,13 @@
-##NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
+#NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
 import discord, asyncio, time, datetime, os, logging, sys, json, random
 
 #Command Extensions
 client = discord.Client()
 from cogs.mal import mal
 from cogs.osu import osu
+from cogs.taiko import taiko
+from cogs.ctb import ctb
+from cogs.mania import mania
 from cogs.yt import yt
 from cogs.dict import define
 
@@ -51,7 +54,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith(".dev help"):
+    if message.content.startswith(".help"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']))
@@ -98,7 +101,7 @@ async def on_message(message):
         Embed.add_field(name="🌍 Sonico on the Web:", value="http://sonico.silverdroid.ga")
         await client.send_message(message.channel, embed=Embed)
 
-    if message.content.startswith(".dev build"):
+    if message.content.startswith(".build"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.title = 'Build Information'
         Embed.add_field(name='Build Number:', value=str(config['info']['build']))
@@ -208,11 +211,12 @@ async def on_message(message):
             userid = data[1]
             accuracy = data[4]
             country = data[5]
+            rank = data[6]
             level = data[7]
             Embed = discord.Embed(color=0xE865A0)
             Embed.title = 'osu! | {0}'.format(query)
             Embed.description = 'http://osu.ppy.sh/u/'+userid.format(query)
-            Embed.set_footer(text=message.content[5:]+" | https://osu.ppy.sh/u/"+userid, icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+            Embed.set_footer(text='osu! | '+message.content[5:], icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
             Embed.add_field(name='🆔 User ID:', value=data[1])
             Embed.add_field(name='🎮 Play Count:', value=data[3])
             if accuracy == None:
@@ -220,27 +224,177 @@ async def on_message(message):
             else:
                 Embed.add_field(name='🏅 Accuracy:', value=str(int(float(accuracy)))+'%')
             Embed.add_field(name='🌍 Country:', value=':flag_'+country.lower()+': '+country)
-            Embed.add_field(name='🔶 Rank:', value=data[6])
+            if rank == '0':
+                Embed.add_field(name='🔶 Rank:', value='None')
+            else:
+                Embed.add_field(name='🔶 Rank:', value=rank)
             if level == None:
                 Embed.add_field(name='🚀 Level:', value='Never played.')
             else:
                 Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
-
-            if message.content.startswith(".urbandict"):
-                defi = define.urban(str(message.content[9:]))
-                Embed = discord.Embed(color=0xE865A0)
-                Embed.title = 'Urban Dictionary | {0}'
-            if defi == False:
-                Embed.description = "noffin' found! bet u didn't even type some real ting did u, don't fuk with me!"
-            #    Embed.color = discord.Color.red()
+      
+    if message.content.startswith(".taiko"):
+        query = message.content[7:]
+        Embed = discord.Embed()
+        Embed.title = "osu!taiko | {0}".format(query)
+        dat = taiko.taikoapi(query)
+        if dat == 'serverError':
+            Embed.description = "Hmm... That didn't work. Try again later, nya~"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'credError':
+            Embed.description = "Hmm... Something broke. Try again later, nya~)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'noResults':
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        else:
+            data = taiko.taikoapi(message.content[7:])
+            userid = data[1]
+            accuracy = data[4]
+            country = data[5]
+            rank = data[6]
+            level = data[7]
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'osu!taiko | {0}'.format(query)
+            Embed.description = 'http://osu.ppy.sh/u/'+userid.format(query)
+            Embed.set_footer(text='osu!taiko | '+message.content[7:], icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+            Embed.add_field(name='🆔 User ID:', value=data[1])
+            Embed.add_field(name='🎮 Play Count:', value=data[3])
+            if accuracy == None:
+                Embed.add_field(name='🏅 Accuracy:', value='Never played.')
             else:
-                Embed = discord.Embed(color=0xE865A0)
-            #    Embed.color = discord.Color.blue()
-                Embed.description = (defi)
-                await client.send_message(message.channel, embed=Embed)
-#Utility Commands
+                Embed.add_field(name='🏅 Accuracy:', value=str(int(float(accuracy)))+'%')
+            Embed.add_field(name='🌍 Country:', value=':flag_'+country.lower()+': '+country)
+            if rank == '0':
+                Embed.add_field(name='🔶 Rank:', value='None')
+            else:
+                Embed.add_field(name='🔶 Rank:', value=rank)
+            if level == None:
+                Embed.add_field(name='🚀 Level:', value='Never played.')
+            else:
+                Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
+            Embed.set_thumbnail(url=data[8])
+            await client.send_message(message.channel, embed=Embed)
+            
+    if message.content.startswith(".ctb"):
+        query = message.content[5:]
+        Embed = discord.Embed()
+        Embed.title = "Catch the Beat | {0}".format(query)
+        dat = ctb.ctbapi(query)
+        if dat == 'serverError':
+            Embed.description = "Hmm... That didn't work. Try again later, nya~"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'credError':
+            Embed.description = "Hmm... Something broke. Try again later, nya~)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'noResults':
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        else:
+            data = ctb.ctbapi(message.content[5:])
+            userid = data[1]
+            accuracy = data[4]
+            country = data[5]
+            rank = data[6]
+            level = data[7]
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'Catch The Beat | {0}'.format(query)
+            Embed.description = 'http://osu.ppy.sh/u/'+userid.format(query)
+            Embed.set_footer(text='Catch the Beat | '+message.content[5:], icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+            Embed.add_field(name='🆔 User ID:', value=data[1])
+            Embed.add_field(name='🎮 Play Count:', value=data[3])
+            if accuracy == None:
+                Embed.add_field(name='🏅 Accuracy:', value='Never played.')
+            else:
+                Embed.add_field(name='🏅 Accuracy:', value=str(int(float(accuracy)))+'%')
+            Embed.add_field(name='🌍 Country:', value=':flag_'+country.lower()+': '+country)
+            if rank == '0':
+                Embed.add_field(name='🔶 Rank:', value='None')
+            else:
+                Embed.add_field(name='🔶 Rank:', value=rank)
+            if level == None:
+                Embed.add_field(name='🚀 Level:', value='Never played.')
+            else:
+                Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
+            Embed.set_thumbnail(url=data[8])
+            await client.send_message(message.channel, embed=Embed)
+                
+    if message.content.startswith(".mania"):
+        query = message.content[7:]
+        Embed = discord.Embed()
+        Embed.title = "osu!mania | {0}".format(query)
+        dat = mania.maniaapi(query)
+        if dat == 'serverError':
+            Embed.description = "Hmm... That didn't work. Try again later, nya~"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'credError':
+            Embed.description = "Hmm... Something broke. Try again later, nya~)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/owo.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        elif dat == 'noResults':
+            Embed.description = "I couldn't find anything, nya~ (´｡• ᵕ •｡`)"
+            Embed.set_image(url="http://sonico.silverdroid.ga/img/uwu.jpg")
+            await client.send_message(message.channel, embed=Embed)
+            return
+        else:
+            data = mania.maniaapi(message.content[7:])
+            userid = data[1]
+            accuracy = data[4]
+            country = data[5]
+            rank = data[6]
+            level = data[7]
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'osu!mania | {0}'.format(query)
+            Embed.description = 'http://osu.ppy.sh/u/'+userid.format(query)
+            Embed.set_footer(text='osu!mania | '+message.content[7:], icon_url='https://new.ppy.sh/images/layout/osu-logo.png')
+            Embed.add_field(name='🆔 User ID:', value=data[1])
+            Embed.add_field(name='🎮 Play Count:', value=data[3])
+            if accuracy == None:
+                Embed.add_field(name='🏅 Accuracy:', value='Never played.')
+            else:
+                Embed.add_field(name='🏅 Accuracy:', value=str(int(float(accuracy)))+'%')
+            Embed.add_field(name='🌍 Country:', value=':flag_'+country.lower()+': '+country)
+            if rank == '0':
+                Embed.add_field(name='🔶 Rank:', value='None')
+            else:
+                Embed.add_field(name='🔶 Rank:', value=rank)
+            if level == None:
+                Embed.add_field(name='🚀 Level:', value='Never played.')
+            else:
+                Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
+            Embed.set_thumbnail(url=data[8])
+            await client.send_message(message.channel, embed=Embed)
+                
+    if message.content.startswith(".urban"):
+        defi = define.urban(str(message.content[5:]))
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.title = 'Urban Dictionary | {0}'
+        if defi == False:
+            Embed.description = "I didn't find anything, nya~"
+            Embed.color = discord.Color.red()
+        else:
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.description = (defi)
+            await client.send_message(message.channel, embed=Embed)
+
+    #Utility Commands
     if message.content.startswith(".bug"):
         Embed = discord.Embed(color=0xE865A0)
         Embed.title = '🐛 Eek! Is there a bug?'
@@ -310,7 +464,7 @@ async def on_message(message):
             Embed.color = discord.Color.red()
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
-    if message.content.startswith(".dev shutdown"):
+    if message.content.startswith(".shutdown"):
         if message.author.id == adminID:
             Embed = discord.Embed(color=0xE865A0)
             Embed.set_image(url="http://sonico.silverdroid.ga/img/commands/shutdown.png")
@@ -326,10 +480,11 @@ async def on_message(message):
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
 
-#@client.event
-#sync def on_error(event, *args, **kwargs):
-    #await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
-#    print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
+            
+@client.event
+async def on_error(event, *args, **kwargs):
+    await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
+    print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
 
 try:
     client.run(config['tokens']['token'])
