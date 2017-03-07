@@ -5,7 +5,8 @@ Version 1.2
 
 ```
 This is a DEVELOPMENT Build. This build was carefully tested and checked.
-If you still appear to stumble upon a bug, tell us by opening an issue!```
+If you still appear to stumble upon a bug, tell us by opening an issue!
+```
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
