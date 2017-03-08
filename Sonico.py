@@ -383,14 +383,15 @@ async def on_message(message):
             await client.send_message(message.channel, embed=Embed)
                 
     if message.content.startswith(".urban"):
-        defi = define.urban(str(message.content[5:]))
-        Embed = discord.Embed(color=0xE865A0)
-        Embed.title = 'Urban Dictionary | {0}'
+        defi = define.urban(str(message.content[7:]))
         if defi == False:
+            Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'Urban Dictionary | {0}'
             Embed.description = "I didn't find anything, nya~"
             Embed.color = discord.Color.red()
         else:
             Embed = discord.Embed(color=0xE865A0)
+            Embed.title = 'Urban Dictionary | {0}'
             Embed.description = (defi)
             await client.send_message(message.channel, embed=Embed)
 
