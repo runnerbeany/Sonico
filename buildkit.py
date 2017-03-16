@@ -133,6 +133,12 @@ class main:
                     admins = input("Enter admins (Seperate with commands)> ")
                     config['admins']['admins'] = admins
                     print("Done. Writing to disk...")
+            else:
+                token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
+                config['tokens']['token'] = token
+                admins = input("Enter admins (Seperate with commands)> ")
+                config['admins']['admins'] = admins
+                print("Done. Writing to disk...")
             tools.dumpNow(config)
         elif answer == 6:
             sys.exit()
