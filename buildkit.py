@@ -12,7 +12,7 @@ class startup:
         print("\_______/  \______/ \______|\________|\_______/ \__|  \__|\______|   \__|   ")
         print("PLATFORM: " + str(platform.system()))
         time.sleep(0.5)
-        version = 1.1
+        version = 1.0
         print("Welcome to Build Kit. V:{0}\nPlease wait, Build Kit is starting cold.".format(version))
         if os.path.isfile("config.json") == False:
             print("--Stop Startup--\nLooks like config.json isn't here, make sure build kit is in the correct directory.")
@@ -133,6 +133,12 @@ class main:
                     admins = input("Enter admins (Seperate with commands)> ")
                     config['admins']['admins'] = admins
                     print("Done. Writing to disk...")
+            else:
+                token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
+                config['tokens']['token'] = token
+                admins = input("Enter admins (Seperate with commands)> ")
+                config['admins']['admins'] = admins
+                print("Done. Writing to disk...")
             tools.dumpNow(config)
         elif answer == 6:
             sys.exit()
