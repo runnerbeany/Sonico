@@ -1,2 +1,6 @@
 ####### requirements.txt #######
-discord.py
+discord.py[voice]
+asyncio
+requests
+logging
+wikipedia
