@@ -1,19 +1,14 @@
 import discord, asyncio, time, datetime, os, logging, sys, json, random
 
-#Command Extensions
+#Command Extensions - Loads modules
 from cogs.mal import mal
 client = discord.Client()
-token = '' #Insert Discord Bot Token
-adminID = "" #Insert your ID to access the Admin commands
-version = "1.0"
-build = "4"
 from cogs.osu import osu
 from cogs.yt import yt
-#Define the client function with discord.client.
+#Finished imports, defines the discord client.
 client = discord.Client()
-with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
-    config = json.load(json_data_file)
-#Set version, build and admins
+with open('config.json') as json_data_file:
+    config = json.load(json_data_file) #Load config into RAM (Config.json)
 info = config['info']['build']
 adminID = config['admins']['admins']
 #Logging
@@ -26,9 +21,9 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
-print("Session log file: ", logfile)
+print("Sonico Discord bot. Session log file: ", logfile)
 
-print("\nSonico: A Bot by Silverdroid. - "+ str(config['info']['version']))
+print("\nSonico: A Bot by Silverdroid, Nevexo and Runnerbeany. - Version: "+ str(config['info']['version']))
 print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + "\n")
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
@@ -67,7 +62,7 @@ async def on_message(message):
         Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the user you mentioned (´｡• ᵕ •｡`)")
         Embed.add_field(name="🌺 .anime", value="Search for your favorite **anime**, nya~")
-        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.") 
+        Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.")
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
         Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
         await client.send_message(message.channel, embed=Embed)

@@ -1,4 +1,4 @@
-import json, sys, os, time
+import json, sys, os, time, platform
 class startup:
     def cold():
         global username
@@ -10,6 +10,8 @@ class startup:
         print("$$ |  $$ |$$ |  $$ |  $$ |  $$ |      $$ |  $$ |$$ |\$$\    $$ |     $$ |   ")
         print("$$$$$$$  |\$$$$$$  |$$$$$$\ $$$$$$$$\ $$$$$$$  |$$ | \$$\ $$$$$$\    $$ |   ")
         print("\_______/  \______/ \______|\________|\_______/ \__|  \__|\______|   \__|   ")
+        print("PLATFORM: " + str(platform.system()))
+        time.sleep(0.5)
         version = 1.0
         print("Welcome to Build Kit. V:{0}\nPlease wait, Build Kit is starting cold.".format(version))
         if os.path.isfile("config.json") == False:
@@ -50,6 +52,7 @@ class main:
         global username
         main.clear()
         print("Hi, " + username)
+        print("OS Platform: " + str(platform.system()) + " | Release: " + str(platform.release()) + "\nPython Version: " + str(sys.version_info[0]) + "." + str(sys.version_info[1]) + " Suggested version: 3.5 - 3.6")
         print("====BuildKit====")
         print("1. Start bot and up build number")
         print("2. Change version number")
@@ -69,7 +72,13 @@ class main:
             print("Updated build number, was: " + str(current) + " now: " + str(new))
             tools.dumpNow(config)
             print("Done, starting bot. PRESS CTRL + C ONCE (AND WAIT) TO STOP THE BOT.\n\n=======================\n")
-            os.system("Sonico.py")
+            if platform.system() == "Linux" or platform.system().lower() == "Darwin":
+                if str(sys.version_info[0]) + "." + str(sys.version_info[1]) == "3.6":
+                    os.system("python3.6 Sonico.py")
+                else:
+                    os.system("python3.5 Sonico.py")
+            else:
+                os.system("Sonico.py")
             print("=======================\nThe bot has crashed/stopped.\nPress enter to continue")
             input()
         elif answer == 2:
@@ -103,12 +112,27 @@ class main:
             print("Done! Safe to commit and push to Github.")
         elif answer == 5:
             print("====Token & Admin import====")
-            token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
             config = tools.loadNow()
-            config['tokens']['token'] = token
-            admins = input("Enter admins (Seperate with commands)> ")
-            config['admins']['admins'] = admins
-            print("Done. Writing to disk...")
+            if os.path.isfile("details.txt"):
+                inp = input("Detected details file (Should contain tokens, add them now?) [Y/n]> ").lower()
+                if inp == "y" or inp == "":
+                    instance = open("details.txt", "r")
+                    arr = []
+                    for i in instance.readlines():
+                        arr.append(i)
+                    inp = input("Use stable token or dev token? [DEV/stable]> ").lower()
+                    if inp == "dev" or inp == "":
+                        config['tokens']['token'] = arr[0].rstrip()
+                    else:
+                        config['tokens']['token'] = arr[1].rstrip()
+                    admins = input("Enter admins (Seperate with commands)> ")
+                    config['admins']['admins'] = admins
+                else:
+                    token = input("Enter the token here (NO SPACES BEFORE OR AFTER)> ")
+                    config['tokens']['token'] = token
+                    admins = input("Enter admins (Seperate with commands)> ")
+                    config['admins']['admins'] = admins
+                    print("Done. Writing to disk...")
             tools.dumpNow(config)
         elif answer == 6:
             sys.exit()

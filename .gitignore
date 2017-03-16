@@ -1,8 +1,7 @@
 *.pyc
-config.py
 logs/
 cogs/keys
 images/Thumbs.db
-config.json
 run.bat
 username.txt
+details.txt
