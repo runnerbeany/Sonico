@@ -234,7 +234,7 @@ async def on_message(message):
                 Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
-      
+
     if message.content.startswith(".taiko"):
         query = message.content[7:]
         Embed = discord.Embed()
@@ -283,7 +283,7 @@ async def on_message(message):
                 Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
-            
+
     if message.content.startswith(".ctb"):
         query = message.content[5:]
         Embed = discord.Embed()
@@ -332,7 +332,7 @@ async def on_message(message):
                 Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
-                
+
     if message.content.startswith(".mania"):
         query = message.content[7:]
         Embed = discord.Embed()
@@ -381,12 +381,12 @@ async def on_message(message):
                 Embed.add_field(name='🚀 Level:', value=str(int(float(level))))
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
-                
+
     if message.content.startswith(".urban"):
         defi = define.urban(str(message.content[7:]))
         if defi == False:
             Embed = discord.Embed(color=0xE865A0)
-            Embed.title = 'Urban Dictionary | {0}'
+            Embed.title = 'Urban Dictionary | {0}'.format(str(message.content[7:]))
             Embed.description = "I didn't find anything, nya~"
             Embed.color = discord.Color.red()
         else:
@@ -481,7 +481,7 @@ async def on_message(message):
             Embed.add_field(name="Error.", value="You don't have Permission for that, nya~ (´｡• ᵕ •｡`)")
             await client.send_message(message.channel, embed=Embed)
 
-            
+
 @client.event
 async def on_error(event, *args, **kwargs):
     await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
