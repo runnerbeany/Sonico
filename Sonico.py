@@ -391,9 +391,9 @@ async def on_message(message):
             Embed.color = discord.Color.red()
         else:
             Embed = discord.Embed(color=0xE865A0)
-            Embed.title = 'Urban Dictionary | {0}'
+            Embed.title = 'Urban Dictionary | {0}'.format(str(message.content[7:]))
             Embed.description = (defi)
-            await client.send_message(message.channel, embed=Embed)
+        await client.send_message(message.channel, embed=Embed)
 
     #Utility Commands
     if message.content.startswith(".bug"):
