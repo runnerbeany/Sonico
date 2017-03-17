@@ -3,3 +3,4 @@ cogs/keys
 images/Thumbs.db
 username.txt
 details.txt
+cogs/__pycache__

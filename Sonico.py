@@ -1,8 +1,19 @@
 #NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
+#NOTE: ALWAYS USE THE BUILDKIT, IT AUTOMATICALLY SIGNS YOUR BUILDS FOR YOU. ALWAYS RUN '4' TO REMOVE TOKENS BEFORE COMMITING.
 import discord, asyncio, time, datetime, os, logging, sys, json, random
-
+confShipped = 10
 #Command Extensions
 client = discord.Client()
+with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
+    config = json.load(json_data_file)
+    if config['info']['configVer'] != confShipped:
+        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
+        if answer == "" or answer == "n":
+            print("Exiting.")
+            sys.exit()
+        else:
+            print("Some features may not work. Continuing start of Sonico!")
+print("Sonico V" + str(config['info']['version']))
 from cogs.mal import mal
 from cogs.osu import osu
 from cogs.taiko import taiko
@@ -11,10 +22,6 @@ from cogs.mania import mania
 from cogs.yt import yt
 from cogs.dict import define
 
-#Define the client function with discord.client.
-client = discord.Client()
-with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
-    config = json.load(json_data_file)
 #Set version, build and admins
 info = config['info']['build']
 adminID = config['admins']['admins']
@@ -31,7 +38,7 @@ logger.addHandler(handler)
 print("Session log file: ", logfile)
 
 print("\nSonico: A Bot by Silverdroid, Nevexo and runnerbeany - "+ str(config['info']['version']))
-print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + "\n")
+print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + " At: " + str(config['info']['builtat']) + "\n")
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
 

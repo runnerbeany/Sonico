@@ -1,4 +1,11 @@
-import json, sys, os, time, platform
+import json, sys, os, time, platform, requests
+version = 1.2
+cont = requests.get("http://txrd.nevexo.space/Sonico/verCache")
+global newVersion
+if float(cont.text.rstrip()) > float(version):
+    newVersion = cont.text.rstrip()
+else:
+    newVersion = False
 class startup:
     def cold():
         global username
@@ -12,7 +19,6 @@ class startup:
         print("\_______/  \______/ \______|\________|\_______/ \__|  \__|\______|   \__|   ")
         print("PLATFORM: " + str(platform.system()))
         time.sleep(0.5)
-        version = 1.0
         print("Welcome to Build Kit. V:{0}\nPlease wait, Build Kit is starting cold.".format(version))
         if os.path.isfile("config.json") == False:
             print("--Stop Startup--\nLooks like config.json isn't here, make sure build kit is in the correct directory.")
@@ -49,9 +55,12 @@ class main:
         for i in range(50):
             print("")
     def home():
+        global newVersion
         global username
         main.clear()
         print("Hi, " + username)
+        if newVersion != False:
+            print("NEW VERSION AVAILABLE. GET IT FROM http://github.com/xSilverdroid/Sonico or use built in updater.")
         print("OS Platform: " + str(platform.system()) + " | Release: " + str(platform.release()) + "\nPython Version: " + str(sys.version_info[0]) + "." + str(sys.version_info[1]) + " Suggested version: 3.5 - 3.6")
         print("====BuildKit====")
         print("1. Start bot and up build number")
@@ -60,6 +69,8 @@ class main:
         print("4. Remove tokens from config.json")
         print("5. Import tokens & Admins")
         print("6. Exit")
+        if newVersion != False:
+            print("0. Update buildkit.py")
         print("===============")
         print("Type the number of the command you want to execute and press enter.")
         answer = int(input(">"))
@@ -141,6 +152,14 @@ class main:
                 print("Done. Writing to disk...")
             tools.dumpNow(config)
         elif answer == 6:
+            sys.exit()
+        elif answer == 0:
+            print("Buildkit.py updater... Downloading the new version.")
+            instance = open("buildkit.py", "w")
+            temp = requests.get("https://raw.githubusercontent.com/xSilverdroid/Sonico/master/buildkit.py")
+            instance.write(temp.text)
+            instance.close()
+            print("Finished updating from origin/master. Please restart buildkit.")
             sys.exit()
         else:
             print("Please enter a number...")
