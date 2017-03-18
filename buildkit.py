@@ -1,5 +1,5 @@
 import json, sys, os, time, platform, requests
-version = 1.3
+version = 1.4
 cont = requests.get("http://txrd.nevexo.space/Sonico/verCache")
 global newVersion
 if float(cont.text.rstrip()) > float(version):
@@ -69,9 +69,12 @@ class main:
         print("4. Remove tokens from config.json")
         print("5. Import tokens & Admins")
         print("6. Exit")
+        config = tools.loadNow()
         if newVersion != False:
             print("0. Update buildkit.py")
         print("===============")
+        if config['tokens']['token'] != "":
+            print("Reminder: The tokens are still in config.json, do not push to Git.")
         print("Type the number of the command you want to execute and press enter.")
         answer = int(input(">"))
         if answer == 1:
