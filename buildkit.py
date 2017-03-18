@@ -1,5 +1,4 @@
 import json, sys, os, time, platform, requests
-version = 1.3
 cont = requests.get("http://txrd.nevexo.space/Sonico/verCache")
 global newVersion
 if float(cont.text.rstrip()) > float(version):
