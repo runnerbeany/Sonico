@@ -1,5 +1,5 @@
 import json, sys, os, time, platform, requests
-version = 1.2
+version = 1.3
 cont = requests.get("http://txrd.nevexo.space/Sonico/verCache")
 global newVersion
 if float(cont.text.rstrip()) > float(version):
@@ -80,6 +80,7 @@ class main:
             new = int(current) + 1
             config['info']['build'] = str(new)
             config['info']['builtby'] = username
+            config['info']['builtat'] = str(time.strftime("%d/%m/%Y")) + " " + str(time.strftime("%H:%M:%S"))
             print("Updated build number, was: " + str(current) + " now: " + str(new))
             tools.dumpNow(config)
             print("Done, starting bot. PRESS CTRL + C ONCE (AND WAIT) TO STOP THE BOT.\n\n=======================\n")
