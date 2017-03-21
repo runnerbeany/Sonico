@@ -1,5 +1,5 @@
 #NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
-#NOTE: ALWAYS USE THE BUILDKIT, IT AUTOMATICALLY SIGNS YOUR BUILDS FOR YOU. ALWAYS RUN '4' TO REMOVE TOKENS BEFORE COMMITING.
+#NOTE: ALWAYS USE THE BUILDKIT, IT AUTOMATICALLY SIGNS YOUR BUILDS FOR YOU. **ALWAYS** RUN '4' TO REMOVE TOKENS BEFORE COMMITING.
 import discord, asyncio, time, datetime, os, logging, sys, json, random
 confShipped = 10
 #Command Extensions
@@ -113,8 +113,10 @@ async def on_message(message):
         Embed.title = 'Build Information'
         Embed.add_field(name='Build Number:', value=str(config['info']['build']))
         Embed.add_field(name='Built By:', value=str(config['info']['builtby']))
+        Embed.add_field(name='Built at:', value=str(config['info']['builtat']))
         Embed.add_field(name='Version Number:', value=str(config['info']['version']))
         await client.send_message(message.channel, embed=Embed)
+
 
 
     #Fun Commands
