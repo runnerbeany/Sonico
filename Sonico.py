@@ -5,10 +5,33 @@ from cogs.mal import mal
 client = discord.Client()
 from cogs.osu import osu
 from cogs.yt import yt
+from cogs.streams import twitch
 #Finished imports, defines the discord client.
 client = discord.Client()
 with open('config.json') as json_data_file:
     config = json.load(json_data_file) #Load config into RAM (Config.json)
+confShipped = 10
+#Command Extensions
+client = discord.Client()
+with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
+    config = json.load(json_data_file)
+    if config['info']['configVer'] != confShipped:
+        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
+        if answer == "" or answer == "n":
+            print("Exiting.")
+            sys.exit()
+        else:
+            print("Some features may not work. Continuing start of Sonico!")
+print("Sonico V" + str(config['info']['version']))
+from cogs.mal import mal
+from cogs.osu import osu
+from cogs.taiko import taiko
+from cogs.ctb import ctb
+from cogs.mania import mania
+from cogs.yt import yt
+from cogs.dict import define
+
+#Set version, build and admins
 info = config['info']['build']
 adminID = config['admins']['admins']
 #Logging
