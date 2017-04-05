@@ -409,8 +409,8 @@ async def on_message(message):
             await client.send_message(message.channel, embed=Embed)
 
     if message.content.startswith(".twitch user"):
-        dat = twitch.twitchAPI(message.content[11:])
-        user = data[1]
+        dat = twitch.twitchAPI(message.content[13:])
+        user = data[0]
         playing = data[2]
         title = data[4]
         thumb = data[3]
