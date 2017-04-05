@@ -9,18 +9,20 @@ print("--------------------------------------------------------------------\n")
 
 class twitch:
     def twitchAPI(query):
-        r = requests.get('https://api.twitch.tv/kraken/users/{0}?client_id=rebrts6nfuqhwkqzi5jt3b8yrtcl6o'.format(query))
+        r = requests.get('https://api.twitch.tv/kraken/channels/{0}?client_id=rebrts6nfuqhwkqzi5jt3b8yrtcl6o'.format(query))
         dat = r.json()
-        dat = [0]
+        data = dat[0]
         data = []
-        data.append(dat['name'])
         data.append(dat['display_name'])
+        data.append(dat['followers'])
+        data.append(dat['game'])
         data.append(dat['logo'])
-        data.append(dat['bio'])
-        return data
+        data.append(dat['status'])
+        data.append(dat['url'])
+
 
 data = twitch.twitchAPI('runnerbeany')
-print(data)
+print(str(data))
 
 class beam:
     def beamAPI(query):
