@@ -1,4 +1,6 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
+<iframe src="https://discordapp.com/widget?id=287279743500550155&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
 Version 1.1 | Build 7
