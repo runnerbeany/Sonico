@@ -408,22 +408,27 @@ async def on_message(message):
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
 
-    if message.content.startswith(".twitch user"):
-        dat = twitch.twitchAPI(message.content[13:])
+    if message.content.startswith(".twitch"):
+        query = message.content[8:]
+        Embed = discord.Embed()
+        Embed.title = "Twitch | {0}".format(query)
+        data = twitch.twitchAPI(query)
+        print(data)
         user = data[0]
+        followers = data[1]
         playing = data[2]
         title = data[4]
         thumb = data[3]
 
-        Embed = discord.Embed(color=0xff6441a5)
+
         Embed.title = 'Twitch | {0}'.format(query)
-        Embed.description = 'http://twitch.tv/'+name.format(query)
-        Embed.add_field(title='Name', value=data[0])
+        #Embed.description = 'http://twitch.tv/{0}'.format(query)
+        Embed.add_field(name='Title:', value=title)
         Embed.set_footer(text=data[5], icon_url='https://img.clipartfest.com/2cb1c9e088b87fc50c322884f46f8b7e_trisha-hershberg-image-twitch-logo-clipart_1920-1080.png')
-        Embed.add_field(name='User:', value=data[1])
-        Embed.add_field(name='Playing:', value=data[2])
-        Embed.add_field(name='Title:', value=data[4])
-        Embed.set_thumbnail(url=data[3])
+        Embed.add_field(name='Name:', value=user)
+        Embed.add_field(name='Playing:', value=playing)
+        Embed.add_field(name='Followers:', value=followers)
+            #Embed.set_thumbnail(url=thumb)
         await client.send_message(message.channel, embed=Embed)
 
     if message.content.startswith(".urban"):
