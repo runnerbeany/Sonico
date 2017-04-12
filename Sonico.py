@@ -1,6 +1,17 @@
 #NOTE: WHEN MERGING, MAKE SURE SHUTDOWN AND BUILD DO NOT HAVE A .DEV PREFIX. THESE ARE HERE JUST TO CHECK IF THE BUILD HERE IS CORRECT.
 #NOTE: ALWAYS USE THE BUILDKIT, IT AUTOMATICALLY SIGNS YOUR BUILDS FOR YOU. **ALWAYS** RUN '4' TO REMOVE TOKENS BEFORE COMMITING.
 import discord, asyncio, time, datetime, os, logging, sys, json, random
+
+#Command Extensions - Loads modules
+from cogs.mal import mal
+client = discord.Client()
+from cogs.osu import osu
+from cogs.yt import yt
+from cogs.streams import twitch
+#Finished imports, defines the discord client.
+client = discord.Client()
+with open('config.json') as json_data_file:
+    config = json.load(json_data_file) #Load config into RAM (Config.json)
 confShipped = 10
 #Command Extensions
 client = discord.Client()
@@ -35,10 +46,15 @@ logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename=logfile, encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
-print("Session log file: ", logfile)
+print("Sonico Discord bot. Session log file: ", logfile)
+
+
+print("\nSonico: A Bot by Silverdroid, Nevexo and Runnerbeany. - Version: "+ str(config['info']['version']))
+print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + "\n")
 
 print("\nSonico: A Bot by Silverdroid, Nevexo and runnerbeany - "+ str(config['info']['version']))
 print("Build information: " + str(config['info']['build']) + " Built by: " + str(config['info']['builtby']) + " At: " + str(config['info']['builtat']) + "\n")
+
 print("Eating Macarons while starting up\n")
 print("------------------------------------------")
 
@@ -392,6 +408,29 @@ async def on_message(message):
             Embed.set_thumbnail(url=data[8])
             await client.send_message(message.channel, embed=Embed)
 
+    if message.content.startswith(".twitch"):
+        query = message.content[8:]
+        Embed = discord.Embed()
+        Embed.title = "Twitch | {0}".format(query)
+        data = twitch.twitchAPI(query)
+        print(data)
+        user = data[0]
+        followers = data[1]
+        playing = data[2]
+        title = data[4]
+        thumb = data[3]
+
+
+        Embed.title = 'Twitch | {0}'.format(query)
+        #Embed.description = 'http://twitch.tv/{0}'.format(query)
+        Embed.add_field(name='Title:', value=title)
+        Embed.set_footer(text=data[5], icon_url='https://img.clipartfest.com/2cb1c9e088b87fc50c322884f46f8b7e_trisha-hershberg-image-twitch-logo-clipart_1920-1080.png')
+        Embed.add_field(name='Name:', value=user)
+        Embed.add_field(name='Playing:', value=playing)
+        Embed.add_field(name='Followers:', value=followers)
+            #Embed.set_thumbnail(url=thumb)
+        await client.send_message(message.channel, embed=Embed)
+
     if message.content.startswith(".urban"):
         defi = define.urban(str(message.content[7:]))
         if defi == False:
@@ -418,7 +457,6 @@ async def on_message(message):
         Embed.set_author(name="Sonico", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.add_field(name="Whoops. This command is still in development.", value="Check back again when we are finished, nya~")
         await client.send_message(message.channel, embed=Embed)
-
 
 
     #Admin Commands

@@ -1,7 +1,5 @@
-import requests
-import json
-
-print("osu! API v1.3\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
+print("\nosu! API Collection tool v1.3\nBy runnerbeany & Nevexo\ngithub.com/runnerbeany github.com/nevexo\n")
+import requests, json
 
 class osu:
     def osuapi(query):
@@ -20,16 +18,12 @@ class osu:
         data.append(dat['level'])
         data.append(avatar)
         return data
-
-        print(r.status_code)
-        if r.status_code == 200:
-            print("Response Code OK. (200)")
+    
         if r.status_code == 201:
             return 'noResults'
-        if r.text == 'Invalid Credentials':
+        if r.text == "Invalid Credentials":
+            print("==osu! API collector: The login information seems incorrect.")
             return 'credError'
+
         if dat == '':
             return 'noResults'
-
-data = osu.osuapi('runnerbeany')
-print(str(data))

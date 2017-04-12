@@ -1,6 +1,7 @@
+*.pyc
 logs/
 cogs/keys
 images/Thumbs.db
+run.bat
 username.txt
 details.txt
-cogs/__pycache__
