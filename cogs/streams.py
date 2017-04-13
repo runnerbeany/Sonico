@@ -12,8 +12,6 @@ class twitch:
         r = requests.get('https://api.twitch.tv/kraken/channels/{0}?client_id=rebrts6nfuqhwkqzi5jt3b8yrtcl6o'.format(query))
         dat = r.json()
         print(dat)
-        #dat = dat[0]
-            #    first_dat = dat[0]
 
         data = []
         data.append(dat['display_name'])
@@ -23,6 +21,14 @@ class twitch:
         data.append(dat['status'])
         data.append(dat['url'])
         return data
+
+    def viewers(query):
+        viewers = requests.get('https://api.twitch.tv/kraken/streams/{0}?client_id=rebrts6nfuqhwkqzi5jt3b8yrtcl6o'.format(query))
+        viewDat = viewers.json()
+        print(viewDat)
+        viewerData = []
+        viewerData.append(viewDat['viewers'])
+        return viewerData
 
 
 #data = twitch.twitchAPI('runnerbeany')

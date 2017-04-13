@@ -17,13 +17,13 @@ confShipped = 10
 client = discord.Client()
 with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
     config = json.load(json_data_file)
-    if config['info']['configVer'] != confShipped:
-        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
-        if answer == "" or answer == "n":
-            print("Exiting.")
-            sys.exit()
-        else:
-            print("Some features may not work. Continuing start of Sonico!")
+#    if config['info']['configVer'] != confShipped:
+#        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
+#        if answer == "" or answer == "n":
+#            print("Exiting.")
+##            sys.exit()
+#        else:
+#            print("Some features may not work. Continuing start of Sonico!")
 print("Sonico V" + str(config['info']['version']))
 from cogs.mal import mal
 from cogs.osu import osu
@@ -419,6 +419,10 @@ async def on_message(message):
         playing = data[2]
         title = data[4]
         thumb = data[3]
+        viewers = twitch.viewers(query)
+        viewers = viewerData[0]
+
+
 
 
         Embed.title = 'Twitch | {0}'.format(query)
@@ -428,6 +432,11 @@ async def on_message(message):
         Embed.add_field(name='Name:', value=user)
         Embed.add_field(name='Playing:', value=playing)
         Embed.add_field(name='Followers:', value=followers)
+        Embed.add_field(name='Viewers:', value=viewers)
+        if thumb == None:
+            Embed.set_thumbnail(url='http://sonico.silverdroid.ga/img/twitch_noicon.img')
+        else:
+            Embed.set_thumbnail(url=thumb)
             #Embed.set_thumbnail(url=thumb)
         await client.send_message(message.channel, embed=Embed)
 
@@ -532,7 +541,7 @@ async def on_message(message):
 
 @client.event
 async def on_error(event, *args, **kwargs):
-    await client.send_message(discord.Object(id='280711593669558273'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
+    await client.send_message(discord.Object(id='301742246083166211'), "```Error Raised: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
     print("An Error occured, nya~: " + str(sys.exc_info()) + "```" + "Event raised on: " + event)
 
 try:
