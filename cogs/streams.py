@@ -27,7 +27,7 @@ class twitch:
         viewDat = viewers.json()
         print(viewDat)
         viewerData = []
-        viewerData.append(viewDat['viewers'])
+        viewerData.append(viewDat['stream']['viewers'])
         return viewerData
 
 

@@ -432,6 +432,10 @@ async def on_message(message):
         Embed.add_field(name='Name:', value=user)
         Embed.add_field(name='Playing:', value=playing)
         Embed.add_field(name='Followers:', value=followers)
+        if viewers == None:
+            Embed.add_field(name='Viewers:', value="None")
+        else:
+            Embed.add_field(name='Viewers:', value=Viewers)
         Embed.add_field(name='Viewers:', value=viewers)
         if thumb == None:
             Embed.set_thumbnail(url='http://sonico.silverdroid.ga/img/twitch_noicon.img')
