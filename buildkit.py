@@ -17,6 +17,7 @@ class startup:
         print("$$ |  $$ |$$ |  $$ |  $$ |  $$ |      $$ |  $$ |$$ |\$$\    $$ |     $$ |   ")
         print("$$$$$$$  |\$$$$$$  |$$$$$$\ $$$$$$$$\ $$$$$$$  |$$ | \$$\ $$$$$$\    $$ |   ")
         print("\_______/  \______/ \______|\________|\_______/ \__|  \__|\______|   \__|   ")
+        print("No idea what you're doing? Checkout our Wiki to learn how to use BuildKit!")
         print("PLATFORM: " + str(platform.system()))
         time.sleep(0.5)
         print("Welcome to Build Kit. V:{0}\nPlease wait, Build Kit is starting cold.".format(version))
