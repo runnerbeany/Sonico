@@ -82,7 +82,7 @@ async def on_message(message):
         Embed = discord.Embed(color=0xE865A0)
         Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
         Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']))
-        Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid. Let me show you what I can do!")
+        Embed.add_field(name="Hey! I'm Sonico ♡", value="I am a Bot developed by Silverdroid, Nevexo and Runnerbeany. Here's the help categories.")
         Embed.add_field(name="🎉 .invite", value="Invite me to another Server. (*・ω・)ﾉ")
         Embed.add_field(name="🎧 .about", value="Let me tell you a bit about me, nya~")
         Embed.add_field(name="🌍 .website", value="I will give you a link to my website, where you can read more about me :3")
@@ -90,14 +90,33 @@ async def on_message(message):
         Embed.add_field(name="ℹ️ .user", value="I will show you additional info about the user you tagged ヽ(*・ω・)ﾉ")
         Embed.add_field(name="🐛 .bug", value='Found an issue? This command will link you to our issues page on GitHub.')
         Embed.add_field(name="🖼️ .profileimage", value="Changes my profile image to another one on the servers (´｡• ω •｡`) ♡")
-        Embed.add_field(name="🤗 .cuddle", value="Cuddle your friends, nya~ ♡")
-        Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
         Embed.add_field(name="🙂 .avatar", value="I will show you the avatar of the user you mentioned (´｡• ᵕ •｡`)")
         Embed.add_field(name="🌺 .anime", value="Search for your favorite **anime**, nya~")
         Embed.add_field(name="🎵 .osu", value="Search for an **osu! user**.")
+
+        await client.send_message(message.channel, embed=Embed)
+
+    if message.content.startswith(".help admin"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']+' requested by '+message.author)
         Embed.add_field(name="💬 .status", value="Changes the Status Message of the Bot. **Admins only.**")
         Embed.add_field(name="✨.shutdown", value="The Sonico Bot will shut down. **Admins only.**")
+        
         await client.send_message(message.channel, embed=Embed)
+
+    if message.content.startswith(".help fun"):
+        Embed = discord.Embed(color=0xE865A0)
+        Embed.set_author(name="Sonico Help", icon_url="http://assets.silverdroid.ga/assets/sonico/avatar.png")
+        Embed.set_footer(text="Sonico - v"+str(config['info']['version'])+' build '+str(config['info']['build']+' requested by '+message.author)
+        Embed.add_field(name="🤗 .cuddle", value="Cuddle your friends, nya~ ♡")
+        Embed.add_field(name="💤 .nap", value="Take a nap with your friends!")
+
+
+
+
+
+
 
     #Generic Commands
     if message.content.startswith(".invite"):
