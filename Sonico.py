@@ -165,6 +165,7 @@ async def on_message(message):
         Embed.set_image(url="http://sonico.silverdroid.ga/img/cmd/cuddle.gif")
         await client.send_message(message.channel, embed=Embed)
 
+                         
     if message.content.startswith(".nap"):
         if message.mentions:
             napping = message.mentions[0]
