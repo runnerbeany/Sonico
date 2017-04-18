@@ -1,10 +1,12 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/discord.py.svg)](https://pypi.python.org/pypi/discord.py/)
+<iframe src="https://discordapp.com/widget?id=287279743500550155&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
 Version 1.1 | Build 7
 
-```This is a Stable Build. This build was carefully tested and checked.
-If you still appear to stumble upon a bug, tell us by opening an issue!```
+This is a Stable Build. This build was carefully tested and checked.
+If you still appear to stumble upon a bug, tell us by opening an issue!
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
