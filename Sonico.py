@@ -11,11 +11,11 @@ from cogs.streams import twitch
 #Finished imports, defines the discord client.
 client = discord.Client()
 with open('config.json') as json_data_file:
-    config = json.load(json_data_file) #Load config into RAM (Config.json)
+    config = json.load(json_data_file) #Load config into RAM (config.json)
 confShipped = 10
 #Command Extensions
 client = discord.Client()
-with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
+with open('config.json') as json_data_file: #Load up the config file (config.json)
     config = json.load(json_data_file)
 #    if config['info']['configVer'] != confShipped:
 #        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
@@ -24,7 +24,7 @@ with open('config.json') as json_data_file: #tLoad up the config file (con    fi
 ##            sys.exit()
 #        else:
 #            print("Some features may not work. Continuing start of Sonico!")
-print("Sonico V" + str(config['info']['version']))
+print("Sonico v" + str(config['info']['version']))
 from cogs.mal import mal
 from cogs.osu import osu
 from cogs.taiko import taiko
@@ -153,8 +153,7 @@ async def on_message(message):
         Embed.add_field(name='Version Number:', value=str(config['info']['version']))
         await client.send_message(message.channel, embed=Embed)
 
-
-
+        
     #Fun Commands
     if message.content.startswith(".cuddle"):
         if message.mentions:
@@ -440,10 +439,6 @@ async def on_message(message):
         thumb = data[3]
         viewers = twitch.viewers(query)
         viewers = viewerData[0]
-
-
-
-
         Embed.title = 'Twitch | {0}'.format(query)
         #Embed.description = 'http://twitch.tv/{0}'.format(query)
         Embed.add_field(name='Title:', value=title)
