@@ -3,10 +3,10 @@
 
 # Sonico
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
-Version 1.1 | Build 7
+Version 1.6.1 | Build 25 (by Silverdroid)
 
-```This is a Stable Build. This build was carefully tested and checked.
-If you still appear to stumble upon a bug, tell us by opening an issue!```
+```This is a Developer Build and may still include bugs.
+We recommend to use the stable branch of Sonico instead!```
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
@@ -18,56 +18,18 @@ It is still in development, more features will be added!
 - .sonico | Random imges of our waifu, nya~
 - .nsfw | Lewd pictures of Sonico~ OwO
 
-## Commands
-Here is a full list of all bot commands.
-I am always open for command suggestions (´｡• ω •｡`) ♡
+## 🌺 Features
+All **features** can be found on the [Sonico Wiki](https://github.com/xSilverdroid/Sonico/wiki/Features)
 
-### Generic Commands
-- .help | Shows a list of commands.
-- .invite | Invite the bot to another Server (*・ω・)ﾉ
-- .about | Let Sonico tell you a bit about herself.
-
-### Fun Commands
-- .cuddle | Cuddle with your friends!
-- .nap | Tired? Take a nap with your friends
-
-### Searching Commands
-- .anime | Search anime on MyAnimeList
-- .osu user [username] | Views the specified user's osu! page.
-
-### Miscellaneous Commands
-- .avatar | The bot will show you the avatar of the specified user.
-- .user | Shows additional info about the specified user.
-
-### Admin Commands
-- .profileimage | Changes the profile image of the Bot.
-- .status | Changes the status message of the Bot.
-- .shutdown | The Bot will shut down.
-
-## Website
+## 🌎 Website
 Check out Sonico's Website: http://sonico.silverdroid.ga
 
-## Changelog
-Version 1.0 | Build 4
-- Minor Fixes
-- Removed Development Folder, moved to branch dev instead
-- New command: .website
+## 📝 Changelog
+Changelogs will be moving to the [wiki](https://github.com/xSilverdroid/Sonico/wiki).
 
-## Contributors
+## 👥 Contributors
 Sonico is entirely developed by those 3 people:
 
-- Silverdroid - Head Developer, Web Admin
-- Nevexo - Second Developer, Server Admin / Hosting
+- Silverdroid - Head Developer, Web Developer
+- Nevexo - Second Developer, BuildKit Developer
 - Runnerbeany - Third Developer
-
-## Changelog
-This is the **Sonico Changelog.**
-
-#### Version 1.1
-Version 1.1 | Build 7
-- MyAnimeList Integration
-- osu! Integration
-- .cuddle command
-- .nap command
-- Config improvements
-- Minor Fixes

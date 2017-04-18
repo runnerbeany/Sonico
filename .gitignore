@@ -3,6 +3,7 @@ logs/
 cogs/keys
 images/Thumbs.db
 run.bat
+buildkit.bat
 username.txt
 details.txt
 datastore.txt
