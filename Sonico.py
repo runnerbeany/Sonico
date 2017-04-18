@@ -16,14 +16,7 @@ confShipped = 10
 #Command Extensions
 client = discord.Client()
 with open('config.json') as json_data_file: #tLoad up the config file (con    fig.json)
-    config = json.load(json_data_file)
-    if config['info']['configVer'] != confShipped:
-        answer = input("The config is incorrect. (Download it from Github.com/xSilverdroid/Sonico.) Continue starting? [y/N]").lower()
-        if answer == "" or answer == "n":
-            print("Exiting.")
-            sys.exit()
-        else:
-            print("Some features may not work. Continuing start of Sonico!")
+   config = json.load(json_data_file)
 print("Sonico V" + str(config['info']['version']))
 from cogs.mal import mal
 from cogs.osu import osu

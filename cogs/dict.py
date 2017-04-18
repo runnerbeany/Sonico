@@ -1,5 +1,6 @@
-print("\nNevexo's Wikipedia and Urban Dictionary API Tool\nV:1.2")
-import requests, wikipedia, json
+print("\nNevexo's Wikipedia and Urban Dictionary API Tool\nv1.2")
+import requests, json
+#import wikipedia
 class define:
     def urban(query):
         try:
