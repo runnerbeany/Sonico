@@ -1,0 +1,4 @@
+2017-04-12 16:38:52,396:INFO:discord.client: on_ready has successfully been registered as an event
+2017-04-12 16:38:52,397:INFO:discord.client: on_message has successfully been registered as an event
+2017-04-12 16:38:52,398:INFO:discord.client: on_error has successfully been registered as an event
+2017-04-12 16:38:52,398:INFO:discord.client: logging in using static token
