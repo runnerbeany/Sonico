@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"info": {"builtat": "18/04/2017 17:49:15", "builtby": "runnerbeany", "version": "1.5", "build": 0, "name": "Sonico Dev"}, "tokens": {"token": ""}, "admins": {"admins": ""}}
+=======
+{"info": {"version": "1.4", "name": "Sonico", "build": "24", "builtby": "Nevexo"}, "tokens": {"token": ""}, "admins": {"admins": "147842250527735808, 162330485714845696, 101742709093445632"}}
+>>>>>>> cf6cfd8dc2d471c0d987fc573b86705099575c01

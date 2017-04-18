@@ -5,8 +5,8 @@
 A Discord bot by Silverdroid, Nevexo and Runnerbeany.
 Version 1.1 | Build 7
 
-```This is a Stable Build. This build was carefully tested and checked.
-If you still appear to stumble upon a bug, tell us by opening an issue!```
+This is a Stable Build. This build was carefully tested and checked.
+If you still appear to stumble upon a bug, tell us by opening an issue!
 
 Sonico is a Discord Bot written in Python.
 It is still in development, more features will be added!
